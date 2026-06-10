@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MIA — Motor de Inteligencia Artificial | Case Study</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .hover-lift {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 40px 40px -10px rgba(18, 18, 18, 0.04);
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 32px;
+        }
+        .case-modal-shell {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0;
+            background: rgba(5, 8, 15, 0.78);
+            overflow-y: auto;
+        }
+        .case-modal-panel {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: #ffffff;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+        }
+        .case-close-btn {
+            position: sticky;
+            top: 16px;
+            right: 16px;
+            float: right;
+            z-index: 60;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0, 0, 0, 0.45);
+            color: #ffffff;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+        @media (min-width: 768px) {
+            .case-modal-shell { padding: 20px; align-items: center; }
+            .case-modal-panel { width: 80vw; min-height: 95vh; max-height: 95vh; border-radius: 28px; }
+            .case-close-btn { top: 18px; right: 18px; }
+        }
+    </style>
+<!-- Tailwind Config Updated for Noto Sans -->
+<script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dadada",
+                    "on-secondary-container": "#656464",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdbd1",
+                    "surface": "#f9f9f9",
+                    "inverse-on-surface": "#f1f1f1",
+                    "inverse-primary": "#b6c4ff",
+                    "secondary": "#5f5e5e",
+                    "surface-variant": "#e2e2e2",
+                    "outline": "#737688",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "on-tertiary-fixed-variant": "#872100",
+                    "primary-fixed": "#dce1ff",
+                    "on-secondary-fixed-variant": "#474646",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "tertiary-fixed-dim": "#ffb5a0",
+                    "tertiary": "#972500",
+                    "on-surface-variant": "#434656",
+                    "on-primary-fixed-variant": "#0039b3",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "surface-container": "#eeeeee",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#0055ff",
+                    "tertiary-container": "#c13301",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-tint": "#004dea",
+                    "on-tertiary-fixed": "#3b0900",
+                    "on-primary-container": "#e3e6ff",
+                    "surface-container-high": "#e8e8e8",
+                    "inverse-surface": "#2f3131",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f9f9f9",
+                    "outline-variant": "#c3c5d9",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-tertiary-container": "#ffe1d9",
+                    "primary": "#0041c8",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1a1c1c",
+                    "secondary-container": "#e5e2e1",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "background": "#f9f9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "32px",
+                    "unit": "8px",
+                    "section-gap": "128px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Noto Sans", "sans-serif"],
+                    "headline-md": ["Noto Sans", "sans-serif"],
+                    "headline-lg-mobile": ["Noto Sans", "sans-serif"],
+                    "display-lg": ["Noto Sans", "sans-serif"],
+                    "body-md": ["Noto Sans", "sans-serif"],
+                    "body-lg": ["Noto Sans", "sans-serif"],
+                    "headline-lg": ["Noto Sans", "sans-serif"]
+            },
+            "fontSize": {
+                    "label-sm": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed font-['Noto_Sans']">
+<div class="case-modal-shell">
+  <article class="case-modal-panel">
+    <a href="index.html" class="case-close-btn" aria-label="Close case study">
+      <span class="material-symbols-outlined">close</span>
+    </a>
+    <main class="pb-12">
+<!-- Hero Section -->
+<section class="pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto transition-all duration-700 opacity-100 translate-y-0">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-end">
+<div class="lg:col-span-8">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block mb-4" data-i18n="caseStudyLabel">Case Study — Real Estate Innovation</span>
+<h1 class="font-headline-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-6" data-i18n="caseStudyTitle">MIA — Motor de Inteligencia Artificial</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mb-12" data-i18n="caseStudyDesc">
+                        Senior UX/UI Designer at Imaginamos for Grupo Bolívar (2023–2024). Revolutionizing the Colombian property market through conversational AI and data-driven matching.
+                    </p>
+<div class="flex flex-wrap gap-12 border-t border-outline-variant pt-8">
+<div>
+<p class="font-label-sm text-label-sm text-secondary mb-1">CLIENT</p>
+<p class="font-body-md text-body-md font-bold">Ciencuadras</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-secondary mb-1">ROLE</p>
+<p class="font-body-md text-body-md font-bold">Lead Designer</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-secondary mb-1">TIMELINE</p>
+<p class="font-body-md text-body-md font-bold">8 Months</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-secondary mb-1">SERVICE</p>
+<p class="font-body-md text-body-md font-bold">IA Real Estate Strategy</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-primary p-8 rounded-xl shadow-lg">
+<span class="font-display-lg text-headline-lg text-on-primary block font-bold">+70%</span>
+<p class="font-body-md text-body-md text-on-primary opacity-90">Effective leads increase compared to legacy search engines.</p>
+</div>
+<div class="bg-inverse-surface p-8 rounded-xl shadow-lg">
+<p class="font-label-sm text-label-sm text-inverse-on-surface mb-2 font-bold uppercase">HISTORIC MILESTONE</p>
+<p class="font-headline-md text-headline-md text-inverse-on-surface leading-tight font-bold">First AI sales in Grupo Bolívar history</p>
+</div>
+</div>
+</div>
+<div class="mt-section-gap rounded-2xl overflow-hidden shadow-2xl relative h-[614px] md:h-[819px]">
+<img class="w-full h-full object-cover" data-alt="A sophisticated digital interface of the MIA artificial intelligence motor for real estate, showing a sleek dashboard with floating 3D property models and data visualization charts. The lighting is clean and bright with soft blue glow accents, following a minimalist and premium editorial design language. High-end user experience elements and conversational AI windows are visible on a crystal-clear display." src="Assets/ImagesMia/portada.webp"/>
+
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+</section>
+<!-- Context & Problem -->
+<section class="py-section-gap bg-surface-container-lowest transition-all duration-700 opacity-100 translate-y-0">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-5">
+<h2 class="font-headline-lg text-headline-lg mb-8 font-bold">Contexto y problema</h2>
+</div>
+<div class="lg:col-span-7">
+<p class="font-body-lg text-body-lg text-secondary mb-8 leading-relaxed"></p><p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Ciencuadras enfrentaba tres fricciones críticas: el buscador tradicional no segmentaba correctamente a los usuarios, se capturaban altos volúmenes de leads con baja tasa de conversión efectiva, y el negocio necesitaba incorporar IA como ventaja competitiva real. MIA nació como respuesta estratégica desde la dirección del Grupo Bolívar.</p><p></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-6 border-l-2 border-primary bg-surface">
+<span class="material-symbols-outlined text-primary mb-4">search_off</span>
+<p class="font-body-md text-body-md font-bold">Inefficient Search</p>
+<p class="font-body-md text-body-md text-secondary">Users couldn't find what they actually needed using old filters.</p>
+</div>
+<div class="p-6 border-l-2 border-primary bg-surface">
+<span class="material-symbols-outlined text-primary mb-4">trending_down</span>
+<p class="font-body-md text-body-md font-bold">Low Conversion</p>
+<p class="font-body-md text-body-md text-secondary">Qualified traffic was wasted due to lack of personalization.</p>
+</div>
+<div class="p-6 border-l-2 border-primary bg-surface">
+<span class="material-symbols-outlined text-primary mb-4">lightbulb</span>
+<p class="font-body-md text-body-md font-bold">AI Latency</p>
+<p class="font-body-md text-body-md text-secondary">The business needed a first-to-market AI strategic play.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Process: Discovery & Research -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto transition-all duration-700 opacity-100 translate-y-0">
+<div class="mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-4 font-bold">01. Discovery &amp; Research</h2>
+<div class="h-1 w-24 bg-primary"></div>
+</div><div class="mb-16">
+<p class="font-body-lg text-body-lg text-secondary mb-12 leading-relaxed">Combiné cuatro fuentes para entender el problema en profundidad:</p>
+<figure class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant">
+<img alt="Taller de co-creación y análisis de flujos de usuario" class="w-full h-[500px] object-cover" src="Assets/ImagesMia/research.webp"/>
+<figcaption class="p-4 bg-surface-container-low text-label-sm font-label-sm text-secondary italic text-center">Documentación figma de los resultados de research en cada etapa</figcaption>
+</figure>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-section-gap">
+<div class="p-6 border-l-2 border-primary bg-surface-container-low rounded-r-lg">
+<h4 class="font-body-md text-body-md font-bold mb-2">Entrevistas con usuarios</h4>
+<p class="font-body-md text-body-md text-secondary">patrones de búsqueda y puntos de abandono</p>
+</div>
+<div class="p-6 border-l-2 border-primary bg-surface-container-low rounded-r-lg">
+<h4 class="font-body-md text-body-md font-bold mb-2">Análisis de comportamiento</h4>
+<p class="font-body-md text-body-md text-secondary">datos de sesión, clics y conversión</p>
+</div>
+<div class="p-6 border-l-2 border-primary bg-surface-container-low rounded-r-lg">
+<h4 class="font-body-md text-body-md font-bold mb-2"><strong>Benchmark competitivo</strong></h4>
+<p class="font-body-md text-body-md text-secondary">referentes locales e internacionales de proptech e IA</p>
+</div>
+<div class="p-6 border-l-2 border-primary bg-surface-container-low rounded-r-lg">
+<h4 class="font-body-md text-body-md font-bold mb-2">Talleres con stakeholders</h4>
+<p class="font-body-md text-body-md text-secondary">alineación de objetivos entre negocio, producto y tecnología</p>
+</div>
+</div>
+</section><section class="py-section-gap bg-surface-container-low transition-all duration-700 opacity-100 translate-y-0">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-5">
+<h2 class="font-headline-lg text-headline-lg mb-8 font-bold">Definición del problema</h2>
+</div>
+<div class="lg:col-span-7">
+<p class="font-headline-md text-headline-md text-primary mb-8 leading-tight italic">
+          "¿Cómo podemos conectar automáticamente al usuario correcto con la propiedad correcta, antes de que él mismo sepa que la está buscando?"
+        </p>
+<div class="p-8 bg-surface rounded-xl border border-outline-variant">
+<p class="font-label-sm text-label-sm text-secondary mb-4 uppercase tracking-widest">Criterios de éxito definidos con producto y negocio:</p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-lg text-body-lg text-on-surface">Aumentar leads efectivos</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-lg text-body-lg text-on-surface">Reducir tiempo de decisión del usuario</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-lg text-body-lg text-on-surface">Habilitar y optimizar la operación gestionada por IA</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Process: Problem Definition & Strategy -->
+<section class="py-section-gap bg-surface-container transition-all duration-700 opacity-100 translate-y-0">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16"><div class=""><h2 class="font-headline-md text-headline-md mb-6 uppercase tracking-tighter font-bold">sOLUTION</h2><div class="p-8 bg-surface rounded-xl shadow-sm border border-outline-variant"><p class="font-body-lg text-body-lg text-secondary leading-relaxed">La estrategia de diseño de MIA estuvo guiada por un OKR central: aumentar la tasa de leads efectivos mediante hiperpersonalización basada en IA. Cada decisión de diseño se respaldó con datos reales: usé Google Analytics y Microsoft Clarity para identificar patrones de abandono, tasa de rebote y comportamiento en sesión, complementados con reportes del equipo de data science sobre calidad de leads y conversión.</p></div></div><div class=""><h2 class="font-headline-md text-headline-md mb-6 uppercase tracking-tighter font-bold">Enfoque Basado en Datos</h2><div class="space-y-6"><div class="p-8 bg-primary-container/10 rounded-xl border border-primary/20"><p class="font-body-md text-body-md text-on-surface">Los KPIs que monitoreé directamente — tasa de leads efectivos, conversión lead→venta, tiempo en sesión, retención y rebote — funcionaron como criterios de validación en cada iteración, asegurando que los cambios en la interfaz tuvieran impacto medible en el funnel de negocio y no solo en la experiencia percibida.</p></div><div class="grid grid-cols-2 gap-4"><div class="p-4 bg-surface rounded-lg border border-outline-variant"><p class="font-label-sm text-label-sm text-primary mb-1">ANALYTICS</p><p class="font-body-md text-body-md font-bold">Google Analytics</p></div><div class="p-4 bg-surface rounded-lg border border-outline-variant"><p class="font-label-sm text-label-sm text-primary mb-1">BEHAVIOR</p><p class="font-body-md text-body-md font-bold">Microsoft Clarity</p></div></div></div></div></div>
+</div>
+</section>
+<!-- Design & Prototyping -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto overflow-hidden transition-all duration-700 opacity-100 translate-y-0"><div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto"><h2 class="font-headline-lg text-headline-lg mb-8 text-center font-bold">Design</h2><p class="font-body-lg text-body-lg text-secondary mb-16 max-w-3xl mx-auto text-center leading-relaxed">Del wireframe al prototipo de alta fidelidad en tres fases: exploración conceptual, validación con usuarios reales e iteración con el equipo de datos para ajustar la lógica de retargeting a la interfaz.</p><div class="relative group">
+<div class="flex overflow-x-auto gap-6 pb-8 scroll-smooth no-scrollbar snap-x snap-mandatory">
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="Team discussing user journey" class="w-full h-full object-cover" src="Assets/ImagesMia/Desktop - 1.webp"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="UI design components on monitor" class="w-full h-full object-cover" src="Assets/ImagesMia/Desktop - 2.webp"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="Sketching UI wireframes" class="w-full h-full object-cover" src="Assets/ImagesMia/Desktop - 23.webp"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="Real estate app mockup" class="w-full h-full object-cover" src="Assets/ImagesMia/Desktop - 24.webp"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="AI chatbot interface" class="w-full h-full object-cover" src="Assets/ImagesMia/Desktop - 5.webp"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="Property management platform" class="w-full h-full object-cover" src="Assets/ImagesMia/Desktop - 22.webp"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="3D neighborhood map" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6UMLgyKfyB2R4tjA-FEACZCS9UKBICJAt06VOZE3FCP4v2twrX0NZp9ieMCofysaO4zGJ0SK0oSpIKcc6Hk1Vu_gyJClZDAypWw_RIVEUFBMaQTSJklRbMTo3SQjS2fLMwY5Ro5Jz7RipvuCupEvTlSbJ4QgzEp_pGjT7YK9I_5PULhfxmNIFL_mX7wrR70f5aIETJUP_QKc4Jg-OO3Hxf9YwU7wXR-pO8_doQDzNs1obPu5VH56BRGVQuT_jcleLtX8t7I2If5M"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="Onboarding flow mockup" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX8UilyaO_JvczCcw28SsZfwZheInwJel88iaBbM9-tcAdQBvJ-TrQavm69bL_aOrPeg8yX0Mp449dJsUGQTNX9SYGIzrw2nNuswUpSBLJu-JWYpQwrl2GsuKGhkSb5vAzlBIo5h4b7gUQwbDoKfGdYsqqtCcm9pyGsFUygYCGNwojgHrrVG036WixCReXwrkX52wk2k3MTepHvfB7smcOHHECIDBuJRZjo8DO6hiRNzqY5HL_K5sZ-Qp4E7L3BUUSGQ0nTAIEJqo"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="Property detail page" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw5KW7YgFz-1Fe70GBHhL3KfJ-ndvu378N3rg24Ge5uKlbZxQShQPMHWIThIFJUy1l5DRKZBJSaLVb8i1nsygUpYn-xqNLkPt5x4Voht2UElp70S7YPaHVYy-ysVZZ5RgBo8Fsr6RMetfHPPbmioHN2qykYo78mo7RXxo1v9NyG2pKRPIztWxDSIlVpnB_f8bwszKNkRicXAPZ-Q0w_qMNNMPmrs5oXQ6a2lMCJ_SQnbpu7aLGZFyxAVZdaB73uREV74slKHzrGoY"/>
+</div>
+</div>
+<div class="flex-none w-[85vw] md:w-[70vw] snap-center">
+<div class="rounded-xl overflow-hidden shadow-lg border border-outline-variant h-[400px] md:h-[600px]">
+<img alt="Valuation trends dashboard" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4JfG0pyYzPq0Cxiq_lxhsU5liVvIF7mOiiNd5WPaJDlRyKX917nRtKMCi53zlnMdhdoLbOHAlSKO-tr1xi0LdGWhQi6EwT6_pMNNQWdQuBb1Amvn1oRxlgizzcoyFfTMkwCn7xKILPP6o3ZjZa6eyfZYuPgH5n-Wfr8F6MMktyPTKSo0bM3o6eYYpxxVKKh7fniS8VtHGDjywM7gToCnR08IQRLnn3zvN2R--J91el8n_tUfLE_hEtL9k_GR8_cNRbVACtEKmGSI"/>
+</div>
+</div>
+</div>
+<div class="flex justify-center gap-4 mt-8">
+<button class="p-2 rounded-full border border-outline-variant hover:bg-primary hover:text-on-primary transition-colors material-symbols-outlined">arrow_back</button>
+<button class="p-2 rounded-full border border-outline-variant hover:bg-primary hover:text-on-primary transition-colors material-symbols-outlined">arrow_forward</button>
+</div>
+</div></div></section><section class="py-section-gap bg-surface-container-lowest transition-all duration-700 opacity-100 translate-y-0">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-4 font-bold">Testing</h2>
+<div class="h-1 w-24 bg-primary"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-16">
+<div class="lg:col-span-8">
+<p class="font-body-lg text-body-lg text-secondary leading-relaxed">
+          Para asegurar la eficacia del Motor de Inteligencia Artificial, realizamos pruebas de usabilidad exhaustivas y análisis de datos en tiempo real. Esto nos permitió validar la intención del usuario y optimizar el flujo conversacional basado en el comportamiento real.
+        </p>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-12">
+<div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant bg-surface">
+<div class="p-4 border-b border-outline-variant bg-surface-container-low">
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Heatmap &amp; Eye-tracking Analysis</p>
+</div>
+<img alt="Heatmap results" class="w-full h-auto object-cover" src="Assets/ImagesMia/headmap.webp"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant bg-surface">
+<div class="p-4 border-b border-outline-variant bg-surface-container-low">
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">A/B Testing &amp; Metrics</p>
+</div>
+<img alt="A/B testing data" class="w-full h-auto object-cover" src="Assets/ImagesMia/preference-test.webp"/>
+</div>
+<div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant bg-surface">
+<div class="p-4 border-b border-outline-variant bg-surface-container-low">
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">User Flow &amp; Conversion Path</p>
+</div>
+<img alt="User flow diagram" class="w-full h-auto object-cover" src="Assets/ImagesMia/convertion.webp"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Results & Learning -->
+ <section class="py-section-gap bg-surface-container-highest text-on-surface transition-all duration-700">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-4 font-bold">Key Insights</h2>
+<div class="h-1 w-24 bg-primary"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="p-8 bg-surface rounded-2xl border border-outline-variant hover-lift relative overflow-hidden">
+<span class="absolute -top-4 -right-4 text-8xl font-display-lg text-primary/5 select-none">01</span>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">hub</span>
+<p class="font-body-lg text-body-lg leading-relaxed">
+<span class="font-bold text-primary">Insight:</span> el problema no era el inventario, era la incapacidad del sistema de conectar al usuario correcto con la propiedad correcta.
+          </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-8 bg-surface rounded-2xl border border-outline-variant hover-lift relative overflow-hidden">
+<span class="absolute -top-4 -right-4 text-8xl font-display-lg text-primary/5 select-none">02</span>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">ads_click</span>
+<p class="font-body-lg text-body-lg leading-relaxed">
+<span class="font-bold text-primary">Insight:</span> la fricción no estaba en la búsqueda, estaba en el último paso. Diseñar ese momento era crítico.
+          </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="p-8 bg-surface rounded-2xl border border-outline-variant hover-lift relative overflow-hidden">
+<span class="absolute -top-4 -right-4 text-8xl font-display-lg text-primary/5 select-none">03</span>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">psychology</span>
+<p class="font-body-lg text-body-lg leading-relaxed">
+<span class="font-bold text-primary">Insight:</span> el usuario quería control porque el sistema no demostraba inteligencia. MIA tenía que ganarse esa confianza con relevancia, no con más opciones.
+          </p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="p-8 bg-surface rounded-2xl border border-outline-variant hover-lift relative overflow-hidden">
+<span class="absolute -top-4 -right-4 text-8xl font-display-lg text-primary/5 select-none">04</span>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">auto_graph</span>
+<p class="font-body-lg text-body-lg leading-relaxed">
+<span class="font-bold text-primary">Insight:</span> la hiperpersonalización no solo mejora la conversión — construye hábito de uso.
+          </p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="p-8 bg-surface rounded-2xl border border-outline-variant hover-lift relative overflow-hidden lg:col-span-2">
+<span class="absolute -top-4 -right-4 text-8xl font-display-lg text-primary/5 select-none">05</span>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">settings_suggest</span>
+<p class="font-body-lg text-body-lg leading-relaxed">
+<span class="font-bold text-primary">Insight:</span> un buen diseño de IA no optimiza solo la experiencia del usuario — optimiza todo el sistema alrededor de él.
+          </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-section-gap bg-on-surface text-surface transition-all duration-700 opacity-100 translate-y-0">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg mb-16 border-b border-surface/20 pb-8 font-bold" data-i18n="resultsTitle">Results</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-section-gap">
+<div>
+<span class="font-display-lg text-headline-lg block mb-2 font-bold">70%</span>
+<p class="font-body-md text-body-md text-surface/70">Conversion rate increase for leads compared to traditional search.</p>
+</div>
+<div>
+<span class="font-display-lg text-headline-lg block mb-2 font-bold">1st</span>
+<p class="font-body-md text-body-md text-surface/70">AI-driven sale in the history of Grupo Bolívar.</p>
+</div>
+<div>
+<span class="font-display-lg text-headline-lg block mb-2 font-bold">15k+</span>
+<p class="font-body-md text-body-md text-surface/70">Daily active conversations within the first month of launch.</p>
+</div>
+<div>
+<span class="font-display-lg text-headline-lg block mb-2 font-bold">85%</span>
+<p class="font-body-md text-body-md text-surface/70">User satisfaction score (CSAT) for the conversational flow.</p>
+</div>
+</div>
+
+
+<!-- Visualization Mockup -->
+<div class="bg-surface/5 p-8 md:p-12 rounded-3xl border border-surface/10 backdrop-blur-sm">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+<div>
+<h3 class="font-headline-md text-headline-md mb-2 font-bold text-surface">Lead Efficiency Growth</h3>
+<p class="font-body-md text-body-md text-surface/60">Legacy Search vs. MIA AI Engine (Mar - Nov 2024)</p>
+</div>
+<div class="flex gap-6">
+<div class="flex items-center gap-2">
+<div class="w-3 h-0.5 bg-surface/30 border-t border-dashed border-surface/50"></div>
+<span class="text-label-sm font-label-sm text-surface/70">B%CAsqueda Tradicional</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-1 bg-primary rounded-full shadow-[0_0_8px_rgba(0,77,234,0.8)]"></div>
+<span class="text-label-sm font-label-sm text-surface">MIA (AI Engine)</span>
+</div>
+</div>
+</div>
+<div class="relative h-80 w-full mt-8">
+
+    
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between border-b border-l border-surface/10">
+<div class="w-full border-t border-surface/5 h-0"></div>
+<div class="w-full border-t border-surface/5 h-0"></div>
+<div class="w-full border-t border-surface/5 h-0"></div>
+<div class="w-full border-t border-surface/5 h-0"></div>
+</div>
+<!-- SVG Chart -->
+<svg class="absolute inset-0 w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 1000 100">
+<!-- Traditional Line (Subtle/Dashed) -->
+<path class="text-surface/30" d="M 0 80 L 125 78 L 250 82 L 375 79 L 500 81 L 625 77 L 750 80 L 875 78 L 1000 81" fill="none" stroke="currentColor" stroke-dasharray="4 4" stroke-width="2"></path>
+<!-- MIA Line (Primary/Glow) -->
+<path class="drop-shadow-[0_0_10px_rgba(0,65,200,0.5)]" d="M 0 80 L 125 85 L 250 88 L 375 70 L 500 55 L 625 40 L 750 25 L 875 15 L 1000 10" fill="none" stroke="#0041c8" stroke-width="4"></path>
+<!-- Data Points for MIA -->
+<circle cx="0" cy="80" fill="#0041c8" r="4"></circle>
+<circle class="animate-pulse" cx="1000" cy="10" fill="#0041c8" r="6"></circle>
+</svg>
+<!-- Y-Axis Labels -->
+<div class="absolute -left-10 inset-y-0 flex flex-col justify-between text-[10px] font-label-sm text-surface/40">
+<span class="">+100%</span>
+<span class="">+75%</span>
+<span class="">+50%</span>
+<span class="">+25%</span>
+<span class="">0%</span>
+</div>
+<!-- X-Axis Labels -->
+<div class="absolute -bottom-8 inset-x-0 flex justify-between text-[10px] font-label-sm text-surface/40">
+<span class="">Mar</span>
+<span class="">Abr</span>
+<span class="">May</span>
+<span class="">Jun</span>
+<span class="">Jul</span>
+<span class="">Ago</span>
+<span class="">Sep</span>
+<span class="">Oct</span>
+<span class="">Nov</span>
+</div>
+</div>
+
+<div class="mt-16 pt-8 border-t border-surface/10 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+<p class="text-body-md text-surface/80">MIA logr%C3 un crecimiento sostenido del <span class="text-surface font-bold">70%</span> tras la fase inicial de aprendizaje.</p>
+</div>
+</div>
+</div>
+</section><section class="py-section-gap bg-surface-container-low transition-all duration-700 opacity-100 translate-y-0">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<!-- Video Column -->
+<div class="lg:col-span-5 flex justify-center">
+<div class="relative w-full max-w-[320px] aspect-[9/16] bg-surface-container-highest rounded-3xl border border-outline-variant overflow-hidden shadow-2xl">
+<video
+  class="h-full w-full object-cover"
+  src="Assets/ImagesMia/Descubre%20los%20secretos%20del%20mercado%20inmobiliario%20en%20Colombia%20con%20nuestro%203er%20informe%20trimestral.%20%C2%A1.mp4"
+  controls
+  playsinline
+  preload="metadata"
+></video>
+</div>
+</div>
+<!-- Quote Column -->
+<div class="lg:col-span-7">
+<h2 class="font-headline-lg text-headline-lg mb-8 font-bold" data-i18n="learningTitle">Aprendizaje y Reflexión</h2>
+<div class="relative">
+<span class="material-symbols-outlined text-primary/20 text-6xl absolute -top-8 -left-8">format_quote</span>
+<p class="font-headline-md  text-headline-md text-on-surface leading-tight italic relative z-10">
+            "Diseñar para IA no es diseñar la IA — es diseñar la confianza del usuario en ella. El reto más valioso fue aprender a facilitar conversaciones entre perfiles muy distintos y convertir esa tensión en decisiones de diseño claras."
+          </p>
+</div>
+<div class="mt-8 flex items-center gap-4">
+<div class="h-0.5 w-12 bg-primary"></div>
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Esteban ui</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center transition-all duration-700 opacity-100 translate-y-0">
+<h2 class="font-headline-lg text-headline-lg mb-8 font-bold">Want to see more projects?</h2>
+<div class="flex flex-col md:flex-row justify-center gap-6">
+<a class="px-10 py-4 bg-on-surface text-surface rounded-full font-label-sm text-label-sm hover:opacity-80 transition-opacity font-bold" href="#">View my work</a>
+
+</div>
+</section>
+</main>
+  </article>
+</div>
+<script src="script.js" defer></script>
+<script>
+        // Smooth header scroll effect (guarded for the modal layout)
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (!header) return;
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

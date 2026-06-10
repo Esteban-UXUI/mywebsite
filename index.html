@@ -1,0 +1,390 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>EstebanUI</title>
+<!-- Google Fonts: Noto Sans Devanagari -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#e5e2e1",
+                    "primary-fixed": "#dce1ff",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-bright": "#f9f9f9",
+                    "on-secondary-container": "#656464",
+                    "primary-container": "#0055ff",
+                    "background": "#f9f9f9",
+                    "surface-tint": "#004dea",
+                    "on-tertiary-fixed-variant": "#872100",
+                    "surface": "#f9f9f9",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#5f5e5e",
+                    "primary": "#0041c8",
+                    "on-tertiary-fixed": "#3b0900",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f3f3f3",
+                    "on-tertiary-container": "#ffe1d9",
+                    "on-primary-fixed": "#001551",
+                    "outline": "#737688",
+                    "on-background": "#1a1c1c",
+                    "on-surface-variant": "#434656",
+                    "tertiary-container": "#c13301",
+                    "tertiary-fixed-dim": "#ffb5a0",
+                    "inverse-primary": "#b6c4ff",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c3c5d9",
+                    "tertiary-fixed": "#ffdbd1",
+                    "on-primary-fixed-variant": "#0039b3",
+                    "on-primary-container": "#e3e6ff",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-secondary-fixed-variant": "#474646",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-surface": "#2f3131",
+                    "tertiary": "#972500",
+                    "surface-dim": "#dadada",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "section-gap": "128px",
+                    "gutter": "32px",
+                    "container-max": "1280px",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["'Noto Sans Devanagari'"],
+                    "body-lg": ["'Noto Sans Devanagari'"],
+                    "headline-lg": ["'Noto Sans Devanagari'"],
+                    "headline-md": ["'Noto Sans Devanagari'"],
+                    "headline-lg-mobile": ["'Noto Sans Devanagari'"],
+                    "display-lg": ["'Noto Sans Devanagari'"],
+                    "label-sm": ["'Noto Sans Devanagari'"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation -->
+<nav class="fixed top-0 z-50 w-full bg-surface/80 backdrop-blur-xl transition-all duration-300">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<a class="font-headline-md text-headline-md text-on-surface tracking-tighter" href="#">Esteban UI</a>
+<!-- Desktop Links -->
+<div class="hidden md:flex gap-8 items-center">
+<a href="#" class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm" data-i18n="home">Home</a><a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors duration-300" href="#work" data-i18n="work">Work</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#about" data-i18n="about">About</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#services" data-i18n="services">Services</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#contact" data-i18n="contact">Contact</a>
+<div class="flex items-center gap-2 ml-3">
+  <button type="button" class="lang-toggle-button rounded-full border border-outline-variant px-3 py-1 text-xs font-semibold" data-lang="es" aria-label="Cambiar a español">ES</button>
+  <button type="button" class="lang-toggle-button rounded-full border border-outline-variant px-3 py-1 text-xs font-semibold" data-lang="en" aria-label="Switch to English">EN</button>
+</div>
+</div>
+<!-- Mobile Menu Toggle -->
+<button id="mobileMenuButton" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden p-2 text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div id="mobileMenu" class="mobile-menu md:hidden hidden mt-2 rounded-3xl border border-surface-variant bg-surface p-6 shadow-custom mx-margin-mobile md:mx-0">
+<div class="flex flex-col gap-4">
+<a href="#" class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm" data-i18n="home">Home</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors duration-300" href="#work" data-i18n="work">Work</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#about" data-i18n="about">About</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#services" data-i18n="services">Services</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#contact" data-i18n="contact">Contact</a>
+<div class="flex items-center gap-2 pt-2">
+  <button type="button" class="lang-toggle-button rounded-full border border-outline-variant px-3 py-1 text-xs font-semibold" data-lang="es" aria-label="Cambiar a español">ES</button>
+  <button type="button" class="lang-toggle-button rounded-full border border-outline-variant px-3 py-1 text-xs font-semibold" data-lang="en" aria-label="Switch to English">EN</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header id="heroSection" class="animated-gradient relative overflow-hidden h-screen flex flex-col justify-center items-center text-center px-0 pt-24 sm:pt-28">
+<div class="max-w-3xl space-y-6 sm:space-y-8">
+<h1 class="font-display-lg text-headline-lg-mobile sm:text-[44px] md:text-display-lg text-white leading-tight sm:leading-snug" data-i18n="heroTitle">
+                Product &amp; Strategic Designer
+            </h1>
+<p class="font-body-lg text-body-lg text-white/85 max-w-xl mx-auto" data-i18n="heroText">
+                Creating meaningful experiences through research and craft. I bridge the gap between human needs and business goals through curated design systems.
+            </p>
+<div class="pt-8">
+  <div class="flex flex-wrap justify-center gap-8 md:gap-24 mt-10 hero-stats">
+  <div class="flex flex-col items-center">
+    <span class="font-headline-md text-headline-md text-white font-bold">7+</span>
+    <span class="font-label-sm text-label-sm text-white/80 uppercase tracking-widest" data-i18n="years">Years of Experience</span>
+  </div>
+  <div class="flex flex-col items-center">
+    <span class="font-headline-md text-headline-md text-white font-bold">20+</span>
+    <span class="font-label-sm text-label-sm text-white/80 uppercase tracking-widest" data-i18n="brands">Brands</span>
+  </div>
+  <div class="flex flex-col items-center">
+    <span class="font-headline-md text-headline-md text-white font-bold">5+</span>
+    <span class="font-label-sm text-label-sm text-white/80 uppercase tracking-widest" data-i18n="sectors">Sectors</span>
+  </div>
+<!-- Clients Carousel (infinite) -->
+<section class="py-6 overflow-hidden bg-transparent w-screen max-w-none" aria-label="Clients">
+  <div class="flex items-center gap-16 py-4 overflow-hidden w-screen max-w-none">
+    <div class="clients-marquee flex items-center gap-16 py-4 whitespace-nowrap w-max" aria-hidden="true">
+      <div class="clients-marquee__track flex items-center gap-16 shrink-0 w-max" aria-hidden="true">
+        <!-- Set 1 -->
+        <div class="logo-item"><img src="Assets/Banco_Santander_Logotipo%201.svg" alt="Santander" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Samsung.svg" alt="Samsung" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/logo_jelpit_color%201.svg" alt="Jelpit" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/totalplay%201.svg" alt="Total Play" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Seguros%20Bolivar.svg" alt="Grupo Bolívar" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Sentria%201.svg" alt="Sentria" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Alcatel_logo_2016%201.svg" alt="Alcatel" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Logotipo%20Ciencuadras.svg" alt="Ciencuadras" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Group.svg" alt="Group" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Samsung.svg" alt="Samsung" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Banco_Santander_Logotipo%201.svg" alt="Santander" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/totalplay%201.svg" alt="Total Play" class="client-logo" /></div>
+
+        <!-- Set 2 (duplicado para loop infinito) -->
+        <div class="logo-item"><img src="Assets/Banco_Santander_Logotipo%201.svg" alt="Santander" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Samsung.svg" alt="Samsung" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/logo_jelpit_color%201.svg" alt="Jelpit" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/totalplay%201.svg" alt="Total Play" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Seguros%20Bolivar.svg" alt="Grupo Bolívar" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Sentria%201.svg" alt="Sentria" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Alcatel_logo_2016%201.svg" alt="Alcatel" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Logotipo%20Ciencuadras.svg" alt="Ciencuadras" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Group.svg" alt="Group" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Samsung.svg" alt="Samsung" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/Banco_Santander_Logotipo%201.svg" alt="Santander" class="client-logo" /></div>
+        <div class="logo-item"><img src="Assets/totalplay%201.svg" alt="Total Play" class="client-logo" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div></div>
+</div>
+</header>
+<!-- About Me Section -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter items-start" id="about">
+<div class="md:sticky top-32">
+<div class="overflow-hidden rounded-xl shadow-custom aspect-[4/5] w-full">
+<img alt="Professional portrait of the designer" class="w-full h-full object-cover" data-alt="A professional portrait of a product designer in a well-lit minimalist studio. The lighting is soft and high-key, emphasizing a clean modern light-mode aesthetic. The individual has a confident yet approachable expression, wearing a simple high-quality charcoal sweater. The background is a soft-focus architectural space with clean lines and a neutral color palette of off-whites and subtle greys, aligning with a premium editorial design style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTwn06R-lHxXYgWDVXGTZwIw4vdJs5q2K18EcdeiHnZn0obmVeCDHitDN4vWepfhOUATkqZFFQiW0ZxByDFdpnu3XfjgAeIIw5hP_DTVqlvPuxXP05t-wMbf1w_KSkEJ3fSwluSM-gyzXOWQF1pKqKPbOzJUfXDavTLlBH8JiP2t4eCvtePieEHy0taGW6i8MxtP0nKvrBesjf8gkpwSOBhWfzwgZX1N06dMFjKqC2pjPN8YPHstzPbFA9luvwQQP7m_3-y86EwUX7Ag">
+</div>
+</div>
+<div class="space-y-8 md:pl-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface" data-i18n="philosophy">Design Philosophy</h2>
+<div class="font-headline-md text-headline-md leading-relaxed text-secondary italic opacity-80" data-i18n="philosophyQuote">"Design is not just what it looks like and feels like. Design is how it works."</div>
+<div class="font-body-lg text-lg leading-loose text-on-surface-variant space-y-6">
+<p class="" data-i18n="aboutBio">
+I am a Senior UX/UI Designer with over seven years of experience crafting intuitive, data-driven digital solutions across diverse sectors like banking and e-commerce. I specialize in leading cross-functional teams and managing complex design systems to bridge the gap between user needs and business objectives. Currently, I am leveraging advanced AI platforms—including Anthropic, Stitch, and Google Labs—to innovate and streamline the design process. I am seeking new professional opportunities where I can apply my expertise in product strategy and emerging technologies to drive impactful user experiences.
+</p>
+</div>
+</div>
+</section>
+<!-- Selected Works & Insights -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="work">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-12" data-i18n="selectedWorks">Selected Works &amp; Insights</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-gutter mb-section-gap items-stretch">
+<a href="studycasemia.html" class="project-card group block h-full cursor-pointer flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
+<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
+<img alt="Fintech Dashboard Design" class="w-full h-full object-cover" src="Assets/ImagesMia/portada.webp"/>
+<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
+<p class="text-white font-body-md text-center leading-relaxed max-w-xs">Architecting a seamless cross-border payment ecosystem for high-growth enterprises, focusing on clarity, security, and rapid transaction processing workflows.</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Real state</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Mia Ciencuadras</h3>
+</div>
+</a>
+<div class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
+<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
+<img alt="Healthcare Mobile App" class="w-full h-full object-cover" src="Assets/totalPlayPortada.webp">
+<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
+<p class="text-white font-body-md text-center leading-relaxed max-w-xs">A patient-first mobile experience designed to reduce friction in appointment booking and medical record management for over 2 million active users.</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Superapp</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Totalplay</h3>
+</div>
+</div>
+<div class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
+<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
+<img alt="E-commerce Experience" class="w-full h-full object-cover" src="Assets/Sentria portada.webp">
+<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
+<p class="text-white font-body-md text-center leading-relaxed max-w-xs">Redefining luxury retail through a headless commerce solution that prioritizes high-fidelity visual storytelling and a frictionless checkout journey.</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">cibersecurity</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Netdata - Sentria</h3>
+</div>
+</div>
+<div class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
+<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
+<img alt="SaaS Platform Interface" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSCzd8FG7zmpt7DX4VMpn1GPxHOQTwTLHX2ks2shTPdMg9NEDQ6ZJZ2HreBTg9wn4VFZQu8FDHjM8Huyub9OnYX_Bjs1mCbuuTdrzJBgwupxZUcS8GfXB65EKOoy8jEKVXu26rd8qBoL-nYHzoVpx87XN0e3jymUNZUQ8XmiZEJ-vJaPBuqVe5DVG1DwnefADiIgSa5xVN1B7ti4-z5hHwVlj4ztKOquMcZvD_Uf9Mm3oo077mQSrjhdYHySQTBg6N4psqWY_tj5M">
+<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
+<p class="text-white font-body-md text-center leading-relaxed max-w-xs">Developing a complex design system for an enterprise-level analytics tool, ensuring scalability across multiple product modules and global teams.</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Ecomerce</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">TZM</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills & Services -->
+<section class="py-section-gap bg-surface-container-low px-margin-mobile md:px-margin-desktop" id="services">
+<div class="max-w-container-max mx-auto">
+<div class="mb-16 text-center">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest" data-i18n="services">Capabilities</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-4" data-i18n="expertise">Expertise &amp; Services</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Skill 1 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl shadow-custom group hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="web">web</span>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2" data-i18n="servicesCard1Title">UI/UX Design</h3>
+<p class="text-secondary font-body-md" data-i18n="servicesCard1Desc">Creating seamless digital interfaces across mobile and web platforms.</p>
+</div>
+<!-- Skill 2 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl shadow-custom group hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="search_insights">search_insights</span>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2" data-i18n="servicesCard2Title">User Research</h3>
+<p class="text-secondary font-body-md" data-i18n="servicesCard2Desc">In-depth qualitative and quantitative studies to drive design decisions.</p>
+</div>
+<!-- Skill 3 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl shadow-custom group hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="layers">layers</span>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2" data-i18n="servicesCard3Title">Design Systems</h3>
+<p class="text-secondary font-body-md" data-i18n="servicesCard3Desc">Architecting scalable and maintainable component libraries.</p>
+</div>
+<!-- Skill 4 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl shadow-custom group hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="lightbulb">lightbulb</span>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2" data-i18n="servicesCard4Title">Product Strategy</h3>
+<p class="text-secondary font-body-md" data-i18n="servicesCard4Desc">Aligning product goals with user needs for long-term success.</p>
+</div>
+<!-- Skill 5 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl shadow-custom group hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="gesture">gesture</span>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2" data-i18n="servicesCard5Title">Prototyping</h3>
+<p class="text-secondary font-body-md" data-i18n="servicesCard5Desc">High-fidelity interactive demos for testing and stakeholder alignment.</p>
+</div>
+<!-- Skill 6 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl shadow-custom group hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="analytics">analytics</span>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2" data-i18n="servicesCard6Title">Data Analysis</h3>
+<p class="text-secondary font-body-md" data-i18n="servicesCard6Desc">Transforming complex data into actionable design insights.</p>
+</div>
+<!-- Skill 7 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl shadow-custom group hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="groups">groups</span>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2" data-i18n="servicesCard7Title">Design Mentorship</h3>
+<p class="text-secondary font-body-md" data-i18n="servicesCard7Desc">Leading and growing design teams through structured feedback.</p>
+</div>
+<!-- Skill 8 -->
+<div class="p-8 bg-surface-container-lowest rounded-xl shadow-custom group hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="terminal">psychology</span>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2" data-i18n="servicesCard8Title">AI Expertise</h3>
+<p class="text-secondary font-body-md" data-i18n="servicesCard8Desc">Leveraging generative AI and machine learning to build intelligent, user-centric interfaces.</p>
+</div>
+</div>
+</div>
+</section>
+
+
+<!-- Contact Form -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="contact">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6" data-i18n="contactTitle">Let's craft something remarkable.</h2>
+<p class="text-body-lg text-secondary mb-12 max-w-md" data-i18n="contactText">I am currently available for selective freelance projects and permanent leadership roles. Drop me a line if you want to collaborate.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#323232] flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+<span class="font-body-md text-on-surface">esteban.ui.ux@gmail.com</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#323232] flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<span class="font-body-md text-on-surface">Bogotá, Colombia</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-custom">
+<form class="space-y-8">
+<div>
+<label class="block font-label-sm text-label-sm text-secondary uppercase mb-2" data-i18n="nameLabel">Name</label>
+<input class="w-full bg-transparent border-0 border-b border-outline focus:border-primary focus:ring-0 transition-colors py-4 font-body-md" placeholder="Your Name" data-i18n-placeholder="namePlaceholder" type="text" data-i18n="namePlaceholder">
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-secondary uppercase mb-2" data-i18n="emailLabel">Email</label>
+<input class="w-full bg-transparent border-0 border-b border-outline focus:border-primary focus:ring-0 transition-colors py-4 font-body-md" placeholder="your@email.com" type="email" data-i18n="emailPlaceholder">
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-secondary uppercase mb-2" data-i18n="messageLabel">Message</label>
+<textarea class="w-full bg-transparent border-0 border-b border-outline focus:border-primary focus:ring-0 transition-colors py-4 font-body-md" placeholder="Tell me about your project" rows="4" data-i18n="messagePlaceholder"></textarea>
+</div>
+<button class="w-full bg-[#FF9000] text-on-primary py-4 rounded-full font-label-sm text-label-sm hover:opacity-90 active:scale-95 transition-all uppercase tracking-widest font-bold" type="submit" data-i18n="sendMessageButton">Send Message</button>
+</form>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-12 max-w-container-max mx-auto">
+<div class="mb-8 md:mb-0 text-center md:text-left">
+<a class="font-headline-md text-headline-md text-on-surface mb-2 block" href="#">Esteban UI</a>
+<p class="text-secondary font-label-sm text-label-sm" data-i18n="footerCopyright">© 2024 Product Designer Portfolio. All rights reserved.</p>
+</div>
+<div class="flex gap-8 items-center">
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm inline-flex items-center gap-2" href="#" data-i18n="footerLinkedIn">LinkedIn</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm inline-flex items-center gap-2" href="#" data-i18n="footerBehance">Behance</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm inline-flex items-center gap-2" href="#" data-i18n="footerDribbble">Dribbble</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm inline-flex items-center gap-2" href="#" data-i18n="footerEmail">Email</a>
+</div>
+</div>
+</footer>
+
+    <script src="script.js" defer></script>
+
+</body></html>
+
