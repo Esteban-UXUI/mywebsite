@@ -1,0 +1,265 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Works | Designer as Curator</title>
+<!-- Fonts: Noto Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e8e8e8",
+                    "tertiary-fixed-dim": "#ffb5a0",
+                    "surface-dim": "#dadada",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-low": "#f3f3f3",
+                    "primary-fixed": "#dce1ff",
+                    "surface-container-highest": "#e2e2e2",
+                    "secondary-container": "#e5e2e1",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c3c5d9",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#c13301",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#3b0900",
+                    "on-primary-fixed": "#001551",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#ffe1d9",
+                    "tertiary-fixed": "#ffdbd1",
+                    "on-error": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "outline": "#737688",
+                    "on-surface-variant": "#434656",
+                    "on-secondary-container": "#656464",
+                    "on-tertiary-fixed-variant": "#872100",
+                    "on-primary-container": "#e3e6ff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#972500",
+                    "on-error-container": "#93000a",
+                    "secondary": "#5f5e5e",
+                    "background": "#f9f9f9",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#004dea",
+                    "inverse-primary": "#b6c4ff",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-background": "#1a1c1c",
+                    "on-primary-fixed-variant": "#0039b3",
+                    "surface-container": "#eeeeee",
+                    "primary-container": "#0055ff",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "primary": "#0041c8",
+                    "surface-bright": "#f9f9f9",
+                    "inverse-surface": "#2f3131",
+                    "secondary-fixed": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-mobile": "24px",
+                    "margin-desktop": "64px",
+                    "section-gap": "128px",
+                    "container-max": "1280px",
+                    "gutter": "32px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Noto Sans"],
+                    "headline-lg-mobile": ["Noto Sans"],
+                    "body-lg": ["Noto Sans"],
+                    "headline-lg": ["Noto Sans"],
+                    "headline-md": ["Noto Sans"],
+                    "display-lg": ["Noto Sans"],
+                    "body-md": ["Noto Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project-image-container img {
+            transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .project-card:hover .project-image-container img {
+            transform: scale(1.05);
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #1a1c1c;
+            font-family: 'Noto Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 z-50 w-full bg-surface/80 backdrop-blur-xl transition-all duration-300">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<a class="font-headline-md text-headline-md text-on-surface tracking-tighter" href="#">Esteban UI</a>
+<!-- Desktop Links -->
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#work">Work</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#about">About</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#services">Services</a>
+<a class="text-secondary hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#contact">Contact</a>
+<button aria-label="Toggle Theme" class="p-2 rounded-full hover:bg-surface-container-high transition-colors duration-300 flex items-center justify-center text-secondary hover:text-primary" id="theme-toggle">
+<span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+</button></div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden p-2 text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<!-- Header Section -->
+<section class="mt-16 md:mt-32 mb-20 md:mb-24">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-6 max-w-2xl font-semibold"><div><br></div>
+                Selected Works
+            </h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-xl leading-relaxed">
+                A collection of precision-crafted digital experiences where intellectual authority meets technical craft. Each project is a curated response to complex user needs and business objectives.
+            </p>
+</section>
+<!-- Portfolio Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-gutter mb-section-gap">
+<!-- Project Card 1: Fintech -->
+<a href="/studycasemia.html" class="project-card group block cursor-pointer" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
+<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
+<img alt="Fintech Dashboard Design" class="w-full h-full object-cover" src="/Assets/ImagesMia/portada.webp"/>
+<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
+<p class="text-white font-body-md text-center leading-relaxed max-w-xs"> 
+                            Architecting a seamless cross-border payment ecosystem for high-growth enterprises, focusing on clarity, security, and rapid transaction processing workflows.
+                        </p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Real state</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Mia Ciencuadras</h3>
+</div>
+</a>
+<!-- Project Card 2: Healthcare -->
+<div class="project-card group cursor-pointer md:mt-24" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
+<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
+<img alt="Healthcare Mobile App" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhzGcQTJ_9H490nj8XpIfH5KOGTKDJYhMGw3XwYYftBDJM1R9dfaUcmZ94RSrWcLBXN2nwnKkhXt_fGu1oGnPwrGRLKgui3U_OMmUddcpBD6-xCoNgQssAGrlVhoP4tDibrx1yKtlKOlG4lkFg6tW5AVySzwcfka-RPRNrasWp-uXjSsx2bGRrGBwHmJ7q40kmpomuwvUhLaLQZfLnr44Zibv22KAImbZgY3WeelSBKyHuv45Y6iYZ9GNw2tO9gRfrjkbKNMfiN48">
+<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
+<p class="text-white font-body-md text-center leading-relaxed max-w-xs">
+                            A patient-first mobile experience designed to reduce friction in appointment booking and medical record management for over 2 million active users.
+                        </p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Superapp</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Totalplay</h3>
+</div>
+</div>
+<!-- Project Card 3: E-commerce -->
+<div class="project-card group cursor-pointer" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
+<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
+<img alt="E-commerce Experience" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsoytYmBcFhOck0Rh1asicbB7ioJ6kWbzyVlqRa-9dnJKDSxK1zX3fa957pcUbhw7BmKDw7hpv8uumXPnHuTZ58A_gKQ7ytmJk-ND60JO1F3M9yc90jAQEGhOdjyaaBd9op1_mm73sTvJN77amGB1KpNu6GVTRQzghsNU-x-w6GhD5CHFcCQKxJjSPEktPks53R66tpzKnyvHz9m3Qw1RjHl_O7nUR4gC8a9nMfC_hT0tI8I9Iit6gVhFBAGDbCm7ZQvy5Vlw3aKc">
+<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
+<p class="text-white font-body-md text-center leading-relaxed max-w-xs">
+                            Redefining luxury retail through a headless commerce solution that prioritizes high-fidelity visual storytelling and a frictionless checkout journey.
+                        </p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">cibersecurity</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Netdata - Sentria</h3>
+</div>
+</div>
+<!-- Project Card 4: SaaS -->
+<div class="project-card group cursor-pointer md:mt-24" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
+<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
+<img alt="SaaS Platform Interface" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSCzd8FG7zmpt7DX4VMpn1GPxHOQTwTLHX2ks2shTPdMg9NEDQ6ZJZ2HreBTg9wn4VFZQu8FDHjM8Huyub9OnYX_Bjs1mCbuuTdrzJBgwupxZUcS8GfXB65EKOoy8jEKVXu26rd8qBoL-nYHzoVpx87XN0e3jymUNZUQ8XmiZEJ-vJaPBuqVe5DVG1DwnefADiIgSa5xVN1B7ti4-z5hHwVlj4ztKOquMcZvD_Uf9Mm3oo077mQSrjhdYHySQTBg6N4psqWY_tj5M">
+<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
+<p class="text-white font-body-md text-center leading-relaxed max-w-xs">
+                            Developing a complex design system for an enterprise-level analytics tool, ensuring scalability across multiple product modules and global teams.
+                        </p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Ecomerce</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">TZM</h3>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-surface-dim full-width border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-12 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-on-surface dark:text-on-surface mb-8 md:mb-0 font-bold uppercase tracking-tight">
+                eSTEBAN-UI</div>
+<div class="flex flex-col md:flex-row items-center gap-6 md:gap-12">
+<div class="flex gap-8">
+<a class="text-secondary dark:text-secondary-fixed hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-sm text-label-sm uppercase tracking-wider font-semibold" href="#">LinkedIn</a>
+<a class="text-secondary dark:text-secondary-fixed hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-sm text-label-sm uppercase tracking-wider font-semibold" href="#">Behance</a>
+<a class="text-secondary dark:text-secondary-fixed hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-sm text-label-sm uppercase tracking-wider font-semibold" href="#">Dribbble</a>
+<a class="text-secondary dark:text-secondary-fixed hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-label-sm text-label-sm uppercase tracking-wider font-semibold" href="#">Email</a>
+</div>
+<p class="text-secondary dark:text-secondary-fixed font-body-md text-body-md opacity-60">
+                    © 2024 Product Designer Portfolio. All rights reserved.
+                </p>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const icon = themeToggle.querySelector('span');
+
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.textContent = 'light_mode';
+            } else {
+                html.classList.add('dark');
+                icon.textContent = 'dark_mode';
+            }
+        });
+
+        // Hover lift effect enhancement
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px)';
+                card.style.transition = 'transform 0.4s cubic-bezier(0.19, 1, 0.22, 1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+
+
+</body></html>
