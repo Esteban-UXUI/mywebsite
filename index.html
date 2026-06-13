@@ -1,5 +1,5 @@
-<!DOCTYPE html><html class="scroll-smooth" lang="en" style=""><head>
-<meta charset="utf-8">
+<!DOCTYPE html>
+sk<meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>EstebanUI</title>
 <!-- Google Fonts: Noto Sans Devanagari -->
@@ -10,56 +10,57 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
+        darkMode: ["class"],
         theme: {
           extend: {
             "colors": {
-                    "secondary-container": "#e5e2e1",
-                    "primary-fixed": "#dce1ff",
-                    "error": "#ba1a1a",
-                    "on-error": "#ffffff",
-                    "on-secondary-fixed": "#1c1b1b",
-                    "secondary-fixed-dim": "#c8c6c5",
-                    "surface-bright": "#f9f9f9",
-                    "on-secondary-container": "#656464",
-                    "primary-container": "#0055ff",
-                    "background": "#f9f9f9",
-                    "surface-tint": "#004dea",
+                    "secondary-container": "#2a2a2a",
+                    "primary-fixed": "#b6c4ff",
+                    "error": "#ff5a5a",
+                    "on-error": "#000000",
+                    "on-secondary-fixed": "#f9f9f9",
+                    "secondary-fixed-dim": "#3c3c3c",
+                    "surface-bright": "#111111",
+                    "on-secondary-container": "#d0d0d0",
+                    "primary-container": "#1a3cff",
+                    "background": "#111111",
+                    "surface-tint": "#79a6ff",
                     "on-tertiary-fixed-variant": "#872100",
-                    "surface": "#f9f9f9",
+                    "surface": "#111111",
                     "primary-fixed-dim": "#b6c4ff",
-                    "secondary-fixed": "#e5e2e1",
-                    "on-surface": "#1a1c1c",
-                    "surface-container-lowest": "#ffffff",
-                    "surface-container": "#eeeeee",
-                    "surface-variant": "#e2e2e2",
-                    "on-secondary": "#ffffff",
-                    "secondary": "#5f5e5e",
-                    "primary": "#0041c8",
-                    "on-tertiary-fixed": "#3b0900",
-                    "error-container": "#ffdad6",
-                    "surface-container-low": "#f3f3f3",
-                    "on-tertiary-container": "#ffe1d9",
+                    "secondary-fixed": "#2a2a2a",
+                    "on-surface": "#ffffff",
+                    "surface-container-lowest": "#0b0b0b",
+                    "surface-container": "#1c1c1c",
+                    "surface-variant": "#2b2b2b",
+                    "on-secondary": "#000000",
+                    "secondary": "#bdbdbd",
+                    "primary": "#79a6ff",
+                    "on-tertiary-fixed": "#000000",
+                    "error-container": "#5a1515",
+                    "surface-container-low": "#161616",
+                    "on-tertiary-container": "#ffd9d0",
                     "on-primary-fixed": "#001551",
-                    "outline": "#737688",
-                    "on-background": "#1a1c1c",
-                    "on-surface-variant": "#434656",
-                    "tertiary-container": "#c13301",
+                    "outline": "#5f6b7a",
+                    "on-background": "#ffffff",
+                    "on-surface-variant": "#bcbcbc",
+                    "tertiary-container": "#6a1600",
                     "tertiary-fixed-dim": "#ffb5a0",
-                    "inverse-primary": "#b6c4ff",
-                    "on-error-container": "#93000a",
-                    "outline-variant": "#c3c5d9",
+                    "inverse-primary": "#79a6ff",
+                    "on-error-container": "#ffd2d2",
+                    "outline-variant": "#4b5464",
                     "tertiary-fixed": "#ffdbd1",
                     "on-primary-fixed-variant": "#0039b3",
-                    "on-primary-container": "#e3e6ff",
-                    "inverse-on-surface": "#f1f1f1",
-                    "on-secondary-fixed-variant": "#474646",
+                    "on-primary-container": "#e6edff",
+                    "inverse-on-surface": "#0b0b0b",
+                    "on-secondary-fixed-variant": "#dcdcdc",
                     "on-primary": "#ffffff",
-                    "surface-container-highest": "#e2e2e2",
-                    "inverse-surface": "#2f3131",
-                    "tertiary": "#972500",
-                    "surface-dim": "#dadada",
-                    "surface-container-high": "#e8e8e8",
-                    "on-tertiary": "#ffffff"
+                    "surface-container-highest": "#2a2a2a",
+                    "inverse-surface": "#ededed",
+                    "tertiary": "#ff9a70",
+                    "surface-dim": "#0f0f0f",
+                    "surface-container-high": "#232323",
+                    "on-tertiary": "#000000"
             },
             "borderRadius": {
                     "DEFAULT": "0.25rem",
@@ -103,7 +104,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
 </head>
-<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed dark">
+
 <!-- Top Navigation -->
 <nav class="fixed top-0 z-50 w-full bg-surface/80 backdrop-blur-xl transition-all duration-300">
 <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
@@ -208,8 +210,8 @@
 </div>
 </div>
 <div class="space-y-8 md:pl-8">
-<h2 class="font-headline-lg text-headline-lg text-on-surface" data-i18n="philosophy">Design Philosophy</h2>
-<div class="font-headline-md text-headline-md leading-relaxed text-secondary italic opacity-80" data-i18n="philosophyQuote">"Design is not just what it looks like and feels like. Design is how it works."</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface" data-i18n="About me">"Acerca de mi"</h2>
+<div class="font-headline-md text-headline-md leading-relaxed text-secondary italic opacity-80" data-i18n="philosophyQuote">"si crees que el buen diseño es caro, deberías ver el costo del mal diseño."</div>
 <div class="font-body-lg text-lg leading-loose text-on-surface-variant space-y-6">
 <p class="" data-i18n="aboutBio">
 I am a Senior UX/UI Designer with over seven years of experience crafting intuitive, data-driven digital solutions across diverse sectors like banking and e-commerce. I specialize in leading cross-functional teams and managing complex design systems to bridge the gap between user needs and business objectives. Currently, I am leveraging advanced AI platforms—including Anthropic, Stitch, and Google Labs—to innovate and streamline the design process. I am seeking new professional opportunities where I can apply my expertise in product strategy and emerging technologies to drive impactful user experiences.

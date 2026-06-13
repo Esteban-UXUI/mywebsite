@@ -12,7 +12,10 @@ body {
   font-family: 'Noto Sans Devanagari', sans-serif;
   scroll-snap-type: y proximity;
   scroll-padding-top: 5rem;
+  background: #111111;
+  color: #ffffff;
 }
+
 
 header,
 section,
@@ -45,11 +48,12 @@ footer {
 
 .animated-gradient {
   position: relative;
-  background: linear-gradient(0deg, #020a31 0%, #3d0e43 0%, #000000 24%, #126c78 50%, #080208 100%);
+  background: linear-gradient(0deg, #0b0b0b 0%, #111111 20%, #000000 40%, #0f2a33 60%, #111111 100%);
   background-size: 250% 250%;
   animation: gradient-wave-v 8s ease-out alternate infinite;
   overflow: hidden;
 }
+
 
 @keyframes gradient-wave-v {
   0% { background-position: 50% 0%; }
@@ -153,6 +157,35 @@ button,
 a {
   transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
 }
+
+/* Accesibilidad (modo dark): mejor contraste para elementos interactivos */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(0, 122, 255, 0.55);
+  outline-offset: 3px;
+}
+
+/* Botones sólidos: leve degradado para profundidad sin perder contraste */
+/* Nota: usamos selectores por atributo (evita problemas con clases Tailwind como bg-[#FF9000]) */
+button[class*="bg-primary"],
+button[class*="bg-on-primary"],
+button[class*="bg-surface"],
+button[class*="bg-surface-container-lowest"],
+button.bg-primary,
+button.bg-on-primary,
+button.bg-surface,
+button.bg-surface-container-lowest {
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.15));
+}
+
+/* El botón naranja usa bg-[#FF9000]; lo cubrimos con un selector de substring sin romper CSS */
+button[class*="#FF9000"] {
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.15));
+}
+
+/* Evita estilos duplicados de focus: se sobreponen en varias reglas existentes */
+/* input/textarea ya gestionan outline:none arriba; aquí solo dejamos la accesibilidad */
+
 
 .reveal {
   opacity: 0;
