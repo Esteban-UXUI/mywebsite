@@ -1,0 +1,460 @@
+<!DOCTYPE html><html class="light" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Design Systems — Arquitectura · Escala · Consistencia</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary": "#ffffff",
+                "secondary-fixed-dim": "#c8c6c5",
+                "on-surface": "#1a1c1c",
+                "on-error": "#ffffff",
+                "primary-container": "#0055ff",
+                "primary": "#0041c8",
+                "surface-variant": "#e2e2e2",
+                "tertiary-fixed": "#ffdbd1",
+                "surface-tint": "#004dea",
+                "tertiary-fixed-dim": "#ffb5a0",
+                "inverse-on-surface": "#f1f1f1",
+                "surface-dim": "#dadada",
+                "secondary-fixed": "#e5e2e1",
+                "secondary": "#5f5e5e",
+                "surface-container-lowest": "#ffffff",
+                "background": "#f9f9f9",
+                "tertiary": "#972500",
+                "outline": "#737688",
+                "on-tertiary-container": "#ffe1d9",
+                "error": "#ba1a1a",
+                "on-background": "#1a1c1c",
+                "surface-container-highest": "#e2e2e2",
+                "on-secondary": "#ffffff",
+                "secondary-container": "#e5e2e1",
+                "on-secondary-fixed-variant": "#474646",
+                "on-tertiary-fixed": "#3b0900",
+                "surface-container-low": "#f3f3f3",
+                "tertiary-container": "#c13301",
+                "outline-variant": "#c3c5d9",
+                "on-surface-variant": "#434656",
+                "primary-fixed": "#dce1ff",
+                "on-primary-container": "#e3e6ff",
+                "surface-container": "#eeeeee",
+                "on-secondary-container": "#656464",
+                "on-primary-fixed": "#001551",
+                "on-primary-fixed-variant": "#0039b3",
+                "on-tertiary": "#ffffff",
+                "surface-container-high": "#e8e8e8",
+                "on-secondary-fixed": "#1c1b1b",
+                "surface": "#f9f9f9",
+                "on-tertiary-fixed-variant": "#872100",
+                "primary-fixed-dim": "#b6c4ff",
+                "inverse-primary": "#b6c4ff",
+                "on-error-container": "#93000a",
+                "inverse-surface": "#2f3131",
+                "error-container": "#ffdad6",
+                "surface-bright": "#f9f9f9"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "margin-mobile": "24px",
+                "container-max": "1280px",
+                "section-gap": "128px",
+                "unit": "8px",
+                "margin-desktop": "64px",
+                "gutter": "32px"
+            },
+            "fontFamily": {
+                "body-md": ["Noto Sans", "sans-serif"],
+                "display-lg": ["Noto Sans", "sans-serif"],
+                "headline-lg-mobile": ["Noto Sans", "sans-serif"],
+                "headline-md": ["Noto Sans", "sans-serif"],
+                "headline-lg": ["Noto Sans", "sans-serif"],
+                "body-lg": ["Noto Sans", "sans-serif"],
+                "label-sm": ["Noto Sans", "sans-serif"]
+            },
+            "fontSize": {
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "headline-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-sm": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Noto Sans', sans-serif; background-color: #f9f9f9; color: #1a1c1c; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .token-chip { @apply px-3 py-1 bg-surface-container rounded-full text-label-sm font-label-sm text-secondary font-bold; }
+        .fade-up { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Carousel Styles */
+        .carousel-container { position: relative; width: 100%; overflow: hidden; }
+        .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+        .carousel-slide { min-width: 100%; flex-shrink: 0; }
+        .carousel-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.2); transition: all 0.3s ease; cursor: pointer; }
+        .carousel-dot.active { background: #0041c8; width: 24px; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-background overflow-x-hidden font-['Noto_Sans']">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 dark:bg-on-background/80">
+
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="px-margin-desktop max-w-container-max mx-auto pt-24 pb-16 fade-up visible">
+<div class="max-w-4xl">
+<span class="font-label-sm text-label-sm text-primary mb-4 block uppercase tracking-widest font-bold">Case Study — Architecture</span>
+<h1 class="text-4xl md:text-display-lg text-on-background mb-8 leading-tight font-display-lg font-extrabold">Design Systems — Arquitectura · Escala · Consistencia</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mb-12">
+                Estrategia, gobernanza y construcción de lenguajes visuales escalables para productos digitales de alta complejidad en banca, real estate y tecnología.
+            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-outline-variant/30 pt-8">
+<div class="flex flex-col gap-2 fade-up visible">
+<span class="font-headline-md text-headline-md text-on-surface font-extrabold">4</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold">Sistemas construidos</span>
+</div>
+<div class="flex flex-col gap-2 fade-up visible">
+<span class="font-headline-md text-headline-md text-on-surface font-extrabold">3</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold">Industrias distintas</span>
+</div>
+<div class="flex flex-col gap-2 fade-up visible">
+<span class="font-headline-md text-headline-md text-on-surface font-extrabold">AA</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold">WCAG 2.1 Accesibilidad</span>
+</div>
+<div class="flex flex-col gap-2 fade-up visible">
+<span class="font-headline-md text-headline-md text-on-surface font-extrabold">Expert</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold">Figma Tokens &amp; Auto Layout</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Approach (Block 1) -->
+<section class="bg-surface-container-low py-section-gap px-margin-desktop overflow-hidden fade-up visible">
+<div class="max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
+<div class="md:w-1/3">
+<h2 class="text-headline-lg text-on-surface mb-6 font-headline-lg font-bold">Un producto vivo para otros productos</h2>
+<p class="font-body-md text-body-md text-secondary">
+                        Entiendo los sistemas de diseño no como librerías estáticas, sino como infraestructuras críticas que permiten la iteración constante y la excelencia operativa en equipos de diseño y desarrollo.
+                    </p>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+<div class="bg-surface p-8 rounded-xl border border-outline-variant/20 hover:shadow-xl transition-all duration-500">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">variables</span>
+<h3 class="font-label-sm text-label-sm text-on-surface mb-2 font-bold font-headline-md">01 Tokens</h3>
+<p class="font-label-sm text-label-sm text-secondary">Arquitectura de variables semánticas escalables.</p>
+</div>
+<div class="bg-surface p-8 rounded-xl border border-outline-variant/20 hover:shadow-xl transition-all duration-500">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">widgets</span>
+<h3 class="font-label-sm text-label-sm text-on-surface mb-2 font-bold font-headline-md">02 Componentes</h3>
+<p class="font-label-sm text-label-sm text-secondary">Átomos y moléculas con variantes complejas.</p>
+</div>
+<div class="bg-surface p-8 rounded-xl border border-outline-variant/20 hover:shadow-xl transition-all duration-500">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">visibility</span>
+<h3 class="font-label-sm text-label-sm text-on-surface mb-2 font-bold font-headline-md">03 Accesibilidad</h3>
+<p class="font-label-sm text-label-sm text-secondary">Diseño inclusivo bajo estándares WCAG.</p>
+</div>
+<div class="bg-surface p-8 rounded-xl border border-outline-variant/20 hover:shadow-xl transition-all duration-500">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">palette</span>
+<h3 class="font-label-sm text-label-sm text-on-surface mb-2 font-bold font-headline-md">04 Multi-marca</h3>
+<p class="font-label-sm text-label-sm text-secondary">Theming capaz de soportar múltiples entidades.</p>
+</div>
+<div class="bg-surface p-8 rounded-xl border border-outline-variant/20 hover:shadow-xl transition-all duration-500">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl">code_blocks</span>
+<h3 class="font-label-sm text-label-sm text-on-surface mb-2 font-bold font-headline-md">05 Handoff</h3>
+<p class="font-label-sm text-label-sm text-secondary">Documentación técnica para desarrollo ágil.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Built Systems (Block 2) -->
+<section class="py-section-gap px-margin-desktop max-w-container-max mx-auto fade-up visible">
+<h2 class="text-headline-lg text-on-surface mb-16 text-center font-headline-lg font-bold">Sistemas en Producción</h2>
+<div class="space-y-32">
+<!-- Flame -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5">
+<img alt="Flame Logo" class="h-12 mb-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJvHDPseuy6IIhIzRWENkl6S6MzJ-zBp6yjLgOGYqb1Q8lQcSbO_tW3SOtcs9Q3FPWXCuyusfJtFCjIpmLo7biG-wJaYXv3kl8ogTYFc2SM218JtjVvdR2gOLGhEmc99r9ejMSYMGtLiqVPeX0hKlzu9GCTRGm7U5IDyxX1-wcl2-s0BNDzOyQxZsj4xqdP9RW8vkMaqefJA_mGDDlvBps9sLbSwJ0T2StDnMLamgBU8Ujt_B0XiA6YzOi9a8OjaNlyJg3VoUVdn4">
+<h3 class="text-headline-md text-on-surface mb-4 font-headline-md font-bold">Flame · Santander Consumer (Novatec Solutions)</h3>
+<p class="font-body-md text-body-md text-secondary mb-6">Trabajé con Flame en la utilización y corrección de múltiples componentes para productos digitales en Santander Colombia, incluyendo proyectos como Santander Consumer Finanzauto y Prospera. Entre mis logros destaca la implementación de componentes y patrones de búsqueda optimizados para el sistema de diseño local.</p>
+<div class="flex flex-wrap gap-2">
+<span class="token-chip">Banca Móvil</span>
+<span class="token-chip">Figma Variables</span>
+<span class="token-chip">Global Reach</span>
+</div>
+</div>
+<div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden carousel-container aspect-video">
+<div class="carousel-track h-full" style="transform: translateX(-100%);">
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1znpZj19BCA2P8v2dRi6J4-Bx39n4WGJZzUQkJnQcC_l9uxcXi9rXJsgX7cjjBNeDXs-NhmIUWdxpf7N1aVTXiQ1_nopiz9Pw0mnSUndWRNMDqlMDjv7ix7Z0HXdDPCoU33Vx6dC3FU26_GG79Th-EorieO3z1P0Gk3UlP2v9a9sLE9WW0B9s3eGmr2AYm8nDfd7mViIbqL6a5af-SzoVtBLOkBeM3JmQDGWd7oK46M3SzclA0pIcE26VJ6oVONs_BETlSuBxz7s"></div>
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUobPSh3HL_kw9aRfnTlZVBKhYvGGnpxdoLZ9rSTFW56UuVZeYaqMcjpKHBVdLpzqUEV7yj8jrABVc5dh7FvLLgy1GGTySYhsmvRb_7mAq25mVL5le2yZ_YxSR5CV2704QoHQVl-7P8mCptLEImCKOrhKqfFdw9ts3ENGqjhkrLKC6IOD03W38_KJMvabS_mYczTRn0qzRMzFc9RRy5kwxqHJOSEBPMySYa2P1DvPtoJfV4BWnL3JwdB0HVk-nwKJZlEUZ_vPixEk"></div>
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCikJLxiUZJSspQb4LRLddhAZAYq0YE3paXXGVUSlBv99zgTFiSKkKHu-xQgw8R1V-LhARUSolKzaYGlKwnG1Nf30uGNW7UFJOtzqE68Nl3TGAFBsJmT6gqsHn_scCxm4KAZN_HgPUxf6A97L_7D2tPHU8M9c5YsqI_xXZpH5TfIrizvAaSkGVRluKJbb9557cOb_z4FiVvfQDzH1t27j_NIBcn84rqmtSGXiLLoXIbpzm7oksFPtdn51cb5W1UWi3Jkvj5jcD0Dt4"></div>
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwmxh1JU00Lvz5-O9_RgJK3a50q2cpEJU1yEY_c_LROlN2cg3gS08C-WkKvrOPfIuC9lYKPNLbwrGBjIg9-Yd_dNWT2w5r4OQTM9_UBXR_3-A58oBkE_bxHCQSiYEkr-PoEa0bI8q73ItkmpPjS0d7IJp1YK6R-nhxR02_oYHaPSA5qPij47fmjjuvAxiSWji9DjBlg308HjPp_BH6WlMj471FcREznupZQDq4uprfnVs6-K219bJQhd7pSEegErrmuV-bGdEK-E0"></div>
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_gSfVZjG3sz4nx0DAIbYaLwDoa6R3WBXNTDaMYTnUbcyaTEXhXO0QfSRTZAO8jrDgJccEekjYUuolmc39FTV2N9uM83bXk92H1kJLIBggdCAxKRJt6qXO2aeEeAVuullCJe2mOT_Zp_QuM0IoieA2jZ1umr8RvVDumranVPIlRRAFVhFvoQ21YFwaeLR5xTqV_BNQb66uJhpjeElPaaOrK6oo66ju2Fk9YqS1gjZkHaKYAGoFfAg4nOEV3MPvSGZOgtThbxh3C90"></div>
+</div>
+<div class="carousel-dots"><div class="carousel-dot"></div><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+</div>
+</div>
+<!-- Ciencuadras -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center flex-row-reverse">
+<div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden lg:order-1 carousel-container aspect-video">
+<div class="carousel-track h-full" style="transform: translateX(0%);">
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUobPSh3HL_kw9aRfnTlZVBKhYvGGnpxdoLZ9rSTFW56UuVZeYaqMcjpKHBVdLpzqUEV7yj8jrABVc5dh7FvLLgy1GGTySYhsmvRb_7mAq25mVL5le2yZ_YxSR5CV2704QoHQVl-7P8mCptLEImCKOrhKqfFdw9ts3ENGqjhkrLKC6IOD03W38_KJMvabS_mYczTRn0qzRMzFc9RRy5kwxqHJOSEBPMySYa2P1DvPtoJfV4BWnL3JwdB0HVk-nwKJZlEUZ_vPixEk"></div>
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCikJLxiUZJSspQb4LRLddhAZAYq0YE3paXXGVUSlBv99zgTFiSKkKHu-xQgw8R1V-LhARUSolKzaYGlKwnG1Nf30uGNW7UFJOtzqE68Nl3TGAFBsJmT6gqsHn_scCxm4KAZN_HgPUxf6A97L_7D2tPHU8M9c5YsqI_xXZpH5TfIrizvAaSkGVRluKJbb9557cOb_z4FiVvfQDzH1t27j_NIBcn84rqmtSGXiLLoXIbpzm7oksFPtdn51cb5W1UWi3Jkvj5jcD0Dt4"></div>
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwmxh1JU00Lvz5-O9_RgJK3a50q2cpEJU1yEY_c_LROlN2cg3gS08C-WkKvrOPfIuC9lYKPNLbwrGBjIg9-Yd_dNWT2w5r4OQTM9_UBXR_3-A58oBkE_bxHCQSiYEkr-PoEa0bI8q73ItkmpPjS0d7IJp1YK6R-nhxR02_oYHaPSA5qPij47fmjjuvAxiSWji9DjBlg308HjPp_BH6WlMj471FcREznupZQDq4uprfnVs6-K219bJQhd7pSEegErrmuV-bGdEK-E0"></div>
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_gSfVZjG3sz4nx0DAIbYaLwDoa6R3WBXNTDaMYTnUbcyaTEXhXO0QfSRTZAO8jrDgJccEekjYUuolmc39FTV2N9uM83bXk92H1kJLIBggdCAxKRJt6qXO2aeEeAVuullCJe2mOT_Zp_QuM0IoieA2jZ1umr8RvVDumranVPIlRRAFVhFvoQ21YFwaeLR5xTqV_BNQb66uJhpjeElPaaOrK6oo66ju2Fk9YqS1gjZkHaKYAGoFfAg4nOEV3MPvSGZOgtThbxh3C90"></div>
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1znpZj19BCA2P8v2dRi6J4-Bx39n4WGJZzUQkJnQcC_l9uxcXi9rXJsgX7cjjBNeDXs-NhmIUWdxpf7N1aVTXiQ1_nopiz9Pw0mnSUndWRNMDqlMDjv7ix7Z0HXdDPCoU33Vx6dC3FU26_GG79Th-EorieO3z1P0Gk3UlP2v9a9sLE9WW0B9s3eGmr2AYm8nDfd7mViIbqL6a5af-SzoVtBLOkBeM3JmQDGWd7oK46M3SzclA0pIcE26VJ6oVONs_BETlSuBxz7s"></div>
+</div>
+<div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+</div>
+<div class="lg:col-span-5 lg:order-2">
+<img alt="Grupo Bolivar Logo" class="h-12 mb-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClCPn88JhgIF9Jm4IMbrc2O12RAL0wbkpvhczmnjnud4in06_KyZJiite3O-9slPU5whtvcBnaf5buURPHbWmib4kjssLBYmHEkaLxP9DjniPGZugELqmTDm_3qQjCQGZOanF7sTl6hMZEOeqBWeUHQBGv9yxVE-gqIE3zT1W18_bPUCjXvE0Es-VzAJ7CWSzJi8o5cDfnG9FBjV1pBPnrfvXPxr-3eYFRJcwH0gG9iz9wHJqxPkq7Gyt_vSFxS6aKOinhpbBK88E">
+<h3 class="text-headline-md text-on-surface mb-4 font-headline-md font-bold">Design System · Grupo Bolívar / Ciencuadras (Imaginamos)</h3>
+<p class="font-body-md text-body-md text-secondary mb-6">Trabajé con Flame en la utilización y corrección de múltiples componentes para productos digitales en Santander Colombia, incluyendo proyectos como Santander Consumer Finanzauto y Prospera. Entre mis logros destaca la implementación de componentes y patrones de búsqueda optimizados para el sistema de diseño local.</p>
+<div class="flex flex-wrap gap-2">
+<span class="token-chip">Proptech</span>
+<span class="token-chip">Multi-platform</span>
+<span class="token-chip">Atomic Design</span>
+</div>
+</div>
+</div>
+<!-- Sentria -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5">
+<img alt="Sentria Logo" class="h-10 mb-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYz_LczhjKNuGOH5dXpxGWCV2_W5e8IziV_TeYtHantaMMFqWdSiAUsEN5chR9eXphPy80AmBZfVf32wB1e10NVOXn7ZbuNEoWUZSDEKqRkLfWDMFcTxC45rhTJ6xicM09Iw2IMYtUInq86Ok3dadDeUV7xiwybUFoajxt92T8kPO7kUEJBcaQ-Bn-wN7ouBAsYFMyg0_sXYcRaayUxJ9_lvfiVj7PzjYvR2BuYKRm2wh_RIgFgitKnJaz4RcEZiDxr3tN-SqKnhU">
+<h3 class="text-headline-md text-on-surface mb-4 font-headline-md font-bold">Sentria Netdata</h3>
+<p class="font-body-md text-body-md text-secondary mb-6">Trabajé con Flame en la utilización y corrección de múltiples componentes para productos digitales en Santander Colombia, incluyendo proyectos como Santander Consumer Finanzauto y Prospera. Entre mis logros destaca la implementación de componentes y patrones de búsqueda optimizados para el sistema de diseño local.</p>
+<div class="flex flex-wrap gap-2">
+<span class="token-chip">B2B SaaS</span>
+<span class="token-chip">Data Vis</span>
+<span class="token-chip">Technical UI</span>
+</div>
+</div>
+<div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden carousel-container aspect-video">
+<div class="carousel-track h-full" style="transform: translateX(-100%);">
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCikJLxiUZJSspQb4LRLddhAZAYq0YE3paXXGVUSlBv99zgTFiSKkKHu-xQgw8R1V-LhARUSolKzaYGlKwnG1Nf30uGNW7UFJOtzqE68Nl3TGAFBsJmT6gqsHn_scCxm4KAZN_HgPUxf6A97L_7D2tPHU8M9c5YsqI_xXZpH5TfIrizvAaSkGVRluKJbb9557cOb_z4FiVvfQDzH1t27j_NIBcn84rqmtSGXiLLoXIbpzm7oksFPtdn51cb5W1UWi3Jkvj5jcD0Dt4"></div>
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwmxh1JU00Lvz5-O9_RgJK3a50q2cpEJU1yEY_c_LROlN2cg3gS08C-WkKvrOPfIuC9lYKPNLbwrGBjIg9-Yd_dNWT2w5r4OQTM9_UBXR_3-A58oBkE_bxHCQSiYEkr-PoEa0bI8q73ItkmpPjS0d7IJp1YK6R-nhxR02_oYHaPSA5qPij47fmjjuvAxiSWji9DjBlg308HjPp_BH6WlMj471FcREznupZQDq4uprfnVs6-K219bJQhd7pSEegErrmuV-bGdEK-E0"></div>
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_gSfVZjG3sz4nx0DAIbYaLwDoa6R3WBXNTDaMYTnUbcyaTEXhXO0QfSRTZAO8jrDgJccEekjYUuolmc39FTV2N9uM83bXk92H1kJLIBggdCAxKRJt6qXO2aeEeAVuullCJe2mOT_Zp_QuM0IoieA2jZ1umr8RvVDumranVPIlRRAFVhFvoQ21YFwaeLR5xTqV_BNQb66uJhpjeElPaaOrK6oo66ju2Fk9YqS1gjZkHaKYAGoFfAg4nOEV3MPvSGZOgtThbxh3C90"></div>
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1znpZj19BCA2P8v2dRi6J4-Bx39n4WGJZzUQkJnQcC_l9uxcXi9rXJsgX7cjjBNeDXs-NhmIUWdxpf7N1aVTXiQ1_nopiz9Pw0mnSUndWRNMDqlMDjv7ix7Z0HXdDPCoU33Vx6dC3FU26_GG79Th-EorieO3z1P0Gk3UlP2v9a9sLE9WW0B9s3eGmr2AYm8nDfd7mViIbqL6a5af-SzoVtBLOkBeM3JmQDGWd7oK46M3SzclA0pIcE26VJ6oVONs_BETlSuBxz7s"></div>
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUobPSh3HL_kw9aRfnTlZVBKhYvGGnpxdoLZ9rSTFW56UuVZeYaqMcjpKHBVdLpzqUEV7yj8jrABVc5dh7FvLLgy1GGTySYhsmvRb_7mAq25mVL5le2yZ_YxSR5CV2704QoHQVl-7P8mCptLEImCKOrhKqfFdw9ts3ENGqjhkrLKC6IOD03W38_KJMvabS_mYczTRn0qzRMzFc9RRy5kwxqHJOSEBPMySYa2P1DvPtoJfV4BWnL3JwdB0HVk-nwKJZlEUZ_vPixEk"></div>
+</div>
+<div class="carousel-dots"><div class="carousel-dot"></div><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Figma Process Timeline (Block 3) -->
+<section class="bg-on-background py-section-gap px-margin-desktop text-white fade-up visible">
+<div class="max-w-container-max mx-auto">
+<h2 class="text-headline-lg mb-16 font-headline-lg font-bold">Metodología de Implementación</h2>
+<div class="relative">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+<div class="group bg-surface-container-low/5 p-6 rounded-xl border border-outline-variant/10">
+<div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-4 relative z-10 transition-transform group-hover:scale-110">1</div>
+<h4 class="text-label-sm font-bold mb-2 font-headline-md uppercase tracking-tighter">Auditoría</h4>
+<p class="text-xs text-secondary-fixed-dim">Identificación de inconsistencias y deuda técnica.</p>
+</div>
+<div class="group bg-surface-container-low/5 p-6 rounded-xl border border-outline-variant/10">
+<div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-4 relative z-10 transition-transform group-hover:scale-110">2</div>
+<h4 class="text-label-sm font-bold mb-2 font-headline-md uppercase tracking-tighter">Tokens</h4>
+<p class="text-xs text-secondary-fixed-dim">Definición de variables de color, espaciado y tipografía.</p>
+</div>
+<div class="group bg-surface-container-low/5 p-6 rounded-xl border border-outline-variant/10">
+<div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-4 relative z-10 transition-transform group-hover:scale-110">3</div>
+<h4 class="text-label-sm font-bold mb-2 font-headline-md uppercase tracking-tighter">Primitivos</h4>
+<p class="text-xs text-secondary-fixed-dim">Estructuras básicas y alineación de fundamentos.</p>
+</div>
+<div class="group bg-surface-container-low/5 p-6 rounded-xl border border-outline-variant/10">
+<div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-4 relative z-10 transition-transform group-hover:scale-110">4</div>
+<h4 class="text-label-sm font-bold mb-2 font-headline-md uppercase tracking-tighter">Componentes</h4>
+<p class="text-xs text-secondary-fixed-dim">Construcción de librería de UI reactiva en Figma.</p>
+</div>
+<div class="group bg-surface-container-low/5 p-6 rounded-xl border border-outline-variant/10">
+<div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-4 relative z-10 transition-transform group-hover:scale-110">5</div>
+<h4 class="text-label-sm font-bold mb-2 font-headline-md uppercase tracking-tighter">Documentación</h4>
+<p class="text-xs text-secondary-fixed-dim">Guías de uso, specs técnicos y do's &amp; don'ts.</p>
+</div>
+<div class="group bg-surface-container-low/5 p-6 rounded-xl border border-outline-variant/10">
+<div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-4 relative z-10 transition-transform group-hover:scale-110">6</div>
+<h4 class="text-label-sm font-bold mb-2 font-headline-md uppercase tracking-tighter">Handoff</h4>
+<p class="text-xs text-secondary-fixed-dim">Sincronización fluida con equipos de ingeniería.</p>
+</div>
+<div class="group bg-surface-container-low/5 p-6 rounded-xl border border-outline-variant/10">
+<div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mb-4 relative z-10 transition-transform group-hover:scale-110">7</div>
+<h4 class="text-label-sm font-bold mb-2 font-headline-md uppercase tracking-tighter">Evolución</h4>
+<p class="text-xs text-secondary-fixed-dim">Mantenimiento, gobernanza y mejora continua.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Figma Expertise (Block 4) -->
+<section class="py-section-gap px-margin-desktop max-w-container-max mx-auto fade-up visible">
+<div class="flex flex-col lg:flex-row gap-16 items-center">
+<div class="lg:w-1/2">
+<h2 class="text-headline-lg text-on-surface mb-6 font-headline-lg font-bold">Technical Expertise</h2>
+<p class="font-body-md text-body-md text-secondary mb-12">
+                    Dominio avanzado de Figma como herramienta de arquitectura y documentación. Enfoque en performance de archivos y escalabilidad de librerías para equipos Enterprise.
+                </p>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm font-bold">Figma Variables / Tokens Studio</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">Expert</span>
+</div>
+<div class="h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full transition-all duration-1000 ease-out" style="width: 100%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm font-bold">Auto Layout 5.0 &amp; Advanced Prototyping</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">Expert</span>
+</div>
+<div class="h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full transition-all duration-1000 ease-out" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm font-bold">Component Properties &amp; Variants</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">Expert</span>
+</div>
+<div class="h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full transition-all duration-1000 ease-out" style="width: 100%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm font-bold">Documentation &amp; Design-to-Code Handoff</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Avanzado</span>
+</div>
+<div class="h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full transition-all duration-1000 ease-out" style="width: 85%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 relative">
+<div class="bg-surface-container h-[500px] w-full rounded-2xl flex items-center justify-center p-12 relative overflow-hidden group">
+<div class="relative z-10 text-center">
+<span class="material-symbols-outlined text-primary text-8xl mb-6">architecture</span>
+<p class="font-display-lg italic text-on-surface font-extrabold">Precision in every pixel.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA/Closing (Block 5) -->
+<section class="py-section-gap px-margin-desktop bg-surface-container-highest text-center fade-up visible">
+<div class="max-w-3xl mx-auto">
+<blockquote class="font-body-lg text-on-background italic mb-12 leading-tight font-medium text-body-lg">
+                "Un design system bien construido no le pertenece al diseñador — le pertenece al equipo."
+            </blockquote>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline">
+
+</footer>
+<script>
+    // Carousel Logic
+    function initCarousels() {
+        const containers = document.querySelectorAll('.carousel-container');
+        
+        containers.forEach(container => {
+            const track = container.querySelector('.carousel-track');
+            const slides = track.querySelectorAll('.carousel-slide');
+            const dotsContainer = container.querySelector('.carousel-dots');
+            let currentIndex = 0;
+            const slideCount = slides.length;
+
+            // Create dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+            function updateDots() {
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateDots();
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                goToSlide(currentIndex);
+            }
+
+            // Auto-play
+            let interval = setInterval(nextSlide, 4000);
+
+            // Pause on hover
+            container.addEventListener('mouseenter', () => clearInterval(interval));
+            container.addEventListener('mouseleave', () => interval = setInterval(nextSlide, 4000));
+        });
+    }
+
+    // Intersection Observer for fade-up animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Simple scroll effect for navbar
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('shadow-sm');
+        } else {
+            nav.classList.remove('shadow-sm');
+        }
+    });
+
+    // Initialize all
+    document.addEventListener('DOMContentLoaded', () => {
+        initCarousels();
+    });
+</script>
+
+
+</body></html>

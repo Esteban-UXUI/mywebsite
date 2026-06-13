@@ -98,6 +98,10 @@
       }
     </script>
 <link rel="stylesheet" href="styles.css">
+
+<!-- Vanta (HALO) requires scripts + a target element in the DOM -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- Top Navigation -->
@@ -135,16 +139,16 @@
 </div>
 </nav>
 <!-- Hero Section -->
-<header id="heroSection" class="animated-gradient relative overflow-hidden h-screen flex flex-col justify-center items-center text-center px-0 pt-24 sm:pt-28">
-<div class="max-w-3xl space-y-6 sm:space-y-8">
+<header id="heroSection" class="animated-gradient relative overflow-hidden h-screen flex flex-col justify-center items-center md:items-start md:text-left text-center px-[10%] pt-24 sm:pt-28">
+<div class="max-w-3xl space-y-6 sm:space-y-8 mx-auto md:mx-0 md:pl-0 md:text-left">
 <h1 class="font-display-lg text-headline-lg-mobile sm:text-[44px] md:text-display-lg text-white leading-tight sm:leading-snug" data-i18n="heroTitle">
                 Product &amp; Strategic Designer
             </h1>
-<p class="font-body-lg text-body-lg text-white/85 max-w-xl mx-auto" data-i18n="heroText">
+<p class="font-body-lg text-body-lg text-white/85 max-w-xl mx-auto md:mx-0" data-i18n="heroText">
                 Creating meaningful experiences through research and craft. I bridge the gap between human needs and business goals through curated design systems.
             </p>
 <div class="pt-8">
-  <div class="flex flex-wrap justify-center gap-8 md:gap-24 mt-10 hero-stats">
+  <div class="flex flex-wrap justify-center md:justify-start gap-8 md:gap-24 mt-10 hero-stats">
   <div class="flex flex-col items-center">
     <span class="font-headline-md text-headline-md text-white font-bold">7+</span>
     <span class="font-label-sm text-label-sm text-white/80 uppercase tracking-widest" data-i18n="years">Years of Experience</span>
@@ -231,7 +235,7 @@ I am a Senior UX/UI Designer with over seven years of experience crafting intuit
 </a>
 <div class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
 <div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
-<img alt="Healthcare Mobile App" class="w-full h-full object-cover" src="Assets/totalPlayPortada.webp">
+<img alt="Healthcare Mobile App" class="w-full h-full object-cover" src=https://res.cloudinary.com/dsbdjteyj/image/upload/v1781302584/totalPlayPortada_wlbvhj.webp>
 <div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
 <p class="text-white font-body-md text-center leading-relaxed max-w-xs">A patient-first mobile experience designed to reduce friction in appointment booking and medical record management for over 2 million active users.</p>
 </div>
@@ -243,7 +247,7 @@ I am a Senior UX/UI Designer with over seven years of experience crafting intuit
 </div>
 <div class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
 <div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
-<img alt="E-commerce Experience" class="w-full h-full object-cover" src="Assets/Sentria portada.webp">
+<img alt="E-commerce Experience" class="w-full h-full object-cover" src=https://res.cloudinary.com/dsbdjteyj/image/upload/v1781302583/Sentria_portada_prixli.webp>
 <div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
 <p class="text-white font-body-md text-center leading-relaxed max-w-xs">Redefining luxury retail through a headless commerce solution that prioritizes high-fidelity visual storytelling and a frictionless checkout journey.</p>
 </div>
@@ -255,14 +259,14 @@ I am a Senior UX/UI Designer with over seven years of experience crafting intuit
 </div>
 <div class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
 <div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
-<img alt="SaaS Platform Interface" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSCzd8FG7zmpt7DX4VMpn1GPxHOQTwTLHX2ks2shTPdMg9NEDQ6ZJZ2HreBTg9wn4VFZQu8FDHjM8Huyub9OnYX_Bjs1mCbuuTdrzJBgwupxZUcS8GfXB65EKOoy8jEKVXu26rd8qBoL-nYHzoVpx87XN0e3jymUNZUQ8XmiZEJ-vJaPBuqVe5DVG1DwnefADiIgSa5xVN1B7ti4-z5hHwVlj4ztKOquMcZvD_Uf9Mm3oo077mQSrjhdYHySQTBg6N4psqWY_tj5M">
+<img alt="SaaS Platform Interface" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781305488/design_system_hazjrq.jpg">
 <div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
 <p class="text-white font-body-md text-center leading-relaxed max-w-xs">Developing a complex design system for an enterprise-level analytics tool, ensuring scalability across multiple product modules and global teams.</p>
 </div>
 </div>
 <div class="flex flex-col gap-1">
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Ecomerce</span>
-<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">TZM</h3>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Tech & Design</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Design systems</h3>
 </div>
 </div>
 </div>
@@ -385,6 +389,41 @@ I am a Senior UX/UI Designer with over seven years of experience crafting intuit
 </footer>
 
     <script src="script.js" defer></script>
+
+    <!-- Vanta HALO background (attach after DOM exists) -->
+    <script>
+      (function () {
+        const init = () => {
+          const el = document.querySelector("#heroSection");
+          if (!el || !window.VANTA || !window.VANTA.HALO) return;
+
+          // Evita inicializar dos veces (por si hay recargas parciales)
+          if (el.dataset.vantaInitialized === "true") return;
+          el.dataset.vantaInitialized = "true";
+
+          window.VANTA.HALO({
+            el: "#heroSection",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            baseColor: 0x0,
+            backgroundColor: 0x0,
+            xOffset: 0.15,
+            yOffset: 0.07,
+            // opcional: deja el canvas detrás del contenido
+            backgroundAlpha: 0.0
+          });
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init, { once: true });
+        } else {
+          init();
+        }
+      })();
+    </script>
 
 </body></html>
 

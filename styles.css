@@ -24,6 +24,25 @@ footer {
   background-color: transparent !important;
 }
 
+/* Vanta canvas detrás del contenido */
+#heroSection {
+  position: relative;
+}
+
+#heroSection .vanta-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+#heroSection > * {
+  position: relative;
+  z-index: 1;
+}
+
+
 .animated-gradient {
   position: relative;
   background: linear-gradient(0deg, #020a31 0%, #3d0e43 0%, #000000 24%, #126c78 50%, #080208 100%);
