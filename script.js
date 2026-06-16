@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       about: 'About',
       services: 'Services',
       contact: 'Contact',
-      heroTitle: 'Product Designer & Strategic Thinker',
+      heroTitle: 'Product & UX UI Designer',
       heroText: 'Creating meaningful experiences through research and craft. I bridge the gap between human needs and business goals through curated design systems.',
       years: 'Years of Experience',
       brands: 'Brands',
@@ -271,23 +271,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealTargets.forEach((el) => revealObserver.observe(el));
 
-  const form = document.querySelector('form');
+  const form = document.querySelector('#contact form') || document.querySelector('form');
   if (form) {
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button');
+      // Formspree necesita el submit real; no hacemos preventDefault.
+      const btn = form.querySelector('button[type="submit"]') || form.querySelector('button');
       if (!btn) return;
+
       const originalText = btn.innerText;
-      btn.innerText = 'MESSAGE SENT';
-      btn.classList.replace('bg-primary', 'bg-tertiary-container');
-      btn.classList.add('text-on-tertiary-container');
+      btn.innerText = 'SENDING...';
+      btn.disabled = true;
 
       setTimeout(() => {
+        // No reseteamos aquí porque Formspree/servidor define la respuesta.
         btn.innerText = originalText;
-        btn.classList.replace('bg-tertiary-container', 'bg-primary');
-        btn.classList.remove('text-on-tertiary-container');
-        form.reset();
-      }, 3000);
+        btn.disabled = false;
+      }, 10000);
     });
   }
+
 });
