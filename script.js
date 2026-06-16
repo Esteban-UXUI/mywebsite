@@ -274,20 +274,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('#contact form') || document.querySelector('form');
   if (form) {
     form.addEventListener('submit', (e) => {
-      // Formspree necesita el submit real; no hacemos preventDefault.
+      // Deja que el submit real lo gestione Formspree.
+      // Solo deshabilitamos el botón para evitar doble envío.
       const btn = form.querySelector('button[type="submit"]') || form.querySelector('button');
       if (!btn) return;
 
-      const originalText = btn.innerText;
-      btn.innerText = 'SENDING...';
       btn.disabled = true;
-
-      setTimeout(() => {
-        // No reseteamos aquí porque Formspree/servidor define la respuesta.
-        btn.innerText = originalText;
-        btn.disabled = false;
-      }, 10000);
+      btn.innerText = 'SENDING...';
     });
   }
+
 
 });
