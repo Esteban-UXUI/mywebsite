@@ -216,8 +216,29 @@ textarea:focus {
     line-height: 1.15;
   }
 
+  /* Centrado visual de métricas en mobile */
+  #heroSection {
+    text-align: center;
+  }
+
   .hero-stats {
     gap: 14px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Carrusel: evita que el w-screen + overflow genere sesgo hacia la derecha */
+  .clients-marquee {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    display: flex;
+    justify-content: center;
+  }
+
+  .clients-marquee__track {
+    width: max-content;
+    margin: 0 auto;
   }
 
   .mobile-only-heading {
@@ -225,3 +246,4 @@ textarea:focus {
     line-height: 1.2;
   }
 }
+

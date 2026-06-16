@@ -1,0 +1,8 @@
+Plan aprobado (pendiente de ejecución):
+1) Centrar el bloque hero-stats en mobile: forzar text-align center y revisar container.
+2) Corregir alineación del carrusel: asegurar que el viewport (w-screen) no provoque overflow hacia la derecha; añadir padding horizontal y centrar track.
+3) Evitar inclinación hacia la derecha en dispositivos: probablemente por transform/translate en JS del marquee y por el cálculo halfWidth; añadir una regla CSS que centre el componente y que el track parta desde -halfWidth correcto, sin sesgo.
+4) Añadir estilos CSS para: #heroSection text-align center en mobile, .hero-stats justify-content center siempre en mobile, .clients-marquee y .clients-marquee__track margin: 0 auto;.
+5) Ajustar JS initClientsCarousel: usar getBoundingClientRect().width de marquee/parent para centrar, y usar translateX calculado desde el ancho visible, además de no dejar transform en -halfWidth absoluto que pueda sesgar.
+
+Pendiente: confirmar cambios concretos en styles.css y script.js/index.html.
