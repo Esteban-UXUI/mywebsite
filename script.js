@@ -480,7 +480,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const protectedErrorEl = document.getElementById('protected-access-error');
 
   // Demo key: reemplázala por la real si aplica.
-  const ACCESS_KEY = '1234';
+  const ACCESS_KEY = 'Esteban123';
+
 
   let pendingTargetHref = null;
 
