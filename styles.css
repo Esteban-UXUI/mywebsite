@@ -241,9 +241,41 @@ textarea:focus {
     margin: 0 auto;
   }
 
-  .mobile-only-heading {
+.mobile-only-heading {
     font-size: 2rem;
     line-height: 1.2;
   }
 }
+
+/* ===== Selected Works holographic (Three.js) ===== */
+.tilt-container {
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
+/* Fondo canvas detrás del texto */
+.threejs-scene-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.threejs-scene-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  transform: translateZ(-1px);
+}
+
+/* Asegura que el contenido se mantenga arriba */
+#work .tilt-card {
+  position: relative;
+  z-index: 1;
+}
+
 
