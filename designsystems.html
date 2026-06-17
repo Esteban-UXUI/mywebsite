@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="light" lang="es" style=""><head>
+<!DOCTYPE html><html class="scroll-smooth" lang="es" style=""><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Design Systems — Arquitectura · Escala · Consistencia</title>
@@ -107,17 +107,44 @@
         
         /* Carousel Styles */
         .carousel-container { position: relative; width: 100%; overflow: hidden; }
-        .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+        .carousel-track { display: flex; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); }
         .carousel-slide { min-width: 100%; flex-shrink: 0; }
-        .carousel-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
-        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.2); transition: all 0.3s ease; cursor: pointer; }
-        .carousel-dot.active { background: #0041c8; width: 24px; border-radius: 4px; }
+        .carousel-dots { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.15); transition: all 0.3s ease; cursor: pointer; }
+        .carousel-dot.active { background: #0041c8; width: 32px; border-radius: 4px; }
+        
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 20;
+            opacity: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .carousel-container:hover .carousel-nav-btn { opacity: 1; }
+        .carousel-nav-prev { left: 24px; }
+        .carousel-nav-next { right: 24px; }
     </style>
 </head>
-<body class="bg-background overflow-x-hidden font-['Noto_Sans']">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 dark:bg-on-background/80">
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed font-['Noto_Sans']">
+<div class="case-modal-shell">
+  <article class="case-modal-panel">
+    <a href="index.html" class="case-close-btn" aria-label="Close case study" style="position: fixed; top: 16px; right: 16px;">
+      <span class="material-symbols-outlined">close</span>
+    </a>
+    <main class="pb-12">
 
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 dark:bg-on-background/80 shadow-sm">
 </nav>
 <main class="pt-24">
 <!-- Hero Section -->
@@ -188,77 +215,103 @@
 </div>
 </div>
 </section>
-<!-- Built Systems (Block 2) -->
+<!-- Built Systems (Block 2) - Redesigned for impact -->
 <section class="py-section-gap px-margin-desktop max-w-container-max mx-auto fade-up visible">
-<h2 class="text-headline-lg text-on-surface mb-16 text-center font-headline-lg font-bold">Sistemas en Producción</h2>
-<div class="space-y-32">
+<h2 class="text-headline-lg text-on-surface mb-24 text-center font-headline-lg font-bold">Sistemas en Producción</h2>
+<div class="space-y-48">
 <!-- Flame -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-5">
-<img alt="Flame Logo" class="h-12 mb-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJvHDPseuy6IIhIzRWENkl6S6MzJ-zBp6yjLgOGYqb1Q8lQcSbO_tW3SOtcs9Q3FPWXCuyusfJtFCjIpmLo7biG-wJaYXv3kl8ogTYFc2SM218JtjVvdR2gOLGhEmc99r9ejMSYMGtLiqVPeX0hKlzu9GCTRGm7U5IDyxX1-wcl2-s0BNDzOyQxZsj4xqdP9RW8vkMaqefJA_mGDDlvBps9sLbSwJ0T2StDnMLamgBU8Ujt_B0XiA6YzOi9a8OjaNlyJg3VoUVdn4">
-<h3 class="text-headline-md text-on-surface mb-4 font-headline-md font-bold">Flame · Santander Consumer (Novatec Solutions)</h3>
-<p class="font-body-md text-body-md text-secondary mb-6">Trabajé con Flame en la utilización y corrección de múltiples componentes para productos digitales en Santander Colombia, incluyendo proyectos como Santander Consumer Finanzauto y Prospera. Entre mis logros destaca la implementación de componentes y patrones de búsqueda optimizados para el sistema de diseño local.</p>
+<div class="flex flex-col gap-12">
+<div class="flex flex-col lg:flex-row items-center gap-12">
+<div class="lg:w-2/5 order-2 lg:order-1">
+<div class="flex items-center gap-4 mb-6">
+<img alt="Flame Logo" class="h-10 object-contain" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781670288/76pt_xjajtc.svg">
+<h3 class="text-headline-md text-on-surface font-headline-md font-bold">Flame · Santander Consumer</h3>
+</div>
+<p class="font-body-md text-body-md text-secondary mb-8 leading-relaxed">
+                        Implementación de componentes y patrones de búsqueda optimizados para el sistema de diseño local de Santander Colombia, incluyendo proyectos críticos como Santander Consumer Finanzauto y Prospera.
+                    </p>
 <div class="flex flex-wrap gap-2">
 <span class="token-chip">Banca Móvil</span>
 <span class="token-chip">Figma Variables</span>
 <span class="token-chip">Global Reach</span>
 </div>
 </div>
-<div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden carousel-container aspect-video">
-<div class="carousel-track h-full" style="transform: translateX(-100%);">
-<div class="carousel-slide h-full"><img alt="Flame Portfolio 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1znpZj19BCA2P8v2dRi6J4-Bx39n4WGJZzUQkJnQcC_l9uxcXi9rXJsgX7cjjBNeDXs-NhmIUWdxpf7N1aVTXiQ1_nopiz9Pw0mnSUndWRNMDqlMDjv7ix7Z0HXdDPCoU33Vx6dC3FU26_GG79Th-EorieO3z1P0Gk3UlP2v9a9sLE9WW0B9s3eGmr2AYm8nDfd7mViIbqL6a5af-SzoVtBLOkBeM3JmQDGWd7oK46M3SzclA0pIcE26VJ6oVONs_BETlSuBxz7s"></div>
-<div class="carousel-slide h-full"><img alt="Flame Portfolio 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUobPSh3HL_kw9aRfnTlZVBKhYvGGnpxdoLZ9rSTFW56UuVZeYaqMcjpKHBVdLpzqUEV7yj8jrABVc5dh7FvLLgy1GGTySYhsmvRb_7mAq25mVL5le2yZ_YxSR5CV2704QoHQVl-7P8mCptLEImCKOrhKqfFdw9ts3ENGqjhkrLKC6IOD03W38_KJMvabS_mYczTRn0qzRMzFc9RRy5kwxqHJOSEBPMySYa2P1DvPtoJfV4BWnL3JwdB0HVk-nwKJZlEUZ_vPixEk"></div>
-<div class="carousel-slide h-full"><img alt="Flame Portfolio 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCikJLxiUZJSspQb4LRLddhAZAYq0YE3paXXGVUSlBv99zgTFiSKkKHu-xQgw8R1V-LhARUSolKzaYGlKwnG1Nf30uGNW7UFJOtzqE68Nl3TGAFBsJmT6gqsHn_scCxm4KAZN_HgPUxf6A97L_7D2tPHU8M9c5YsqI_xXZpH5TfIrizvAaSkGVRluKJbb9557cOb_z4FiVvfQDzH1t27j_NIBcn84rqmtSGXiLLoXIbpzm7oksFPtdn51cb5W1UWi3Jkvj5jcD0Dt4"></div>
-<div class="carousel-slide h-full"><img alt="Flame Portfolio 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwmxh1JU00Lvz5-O9_RgJK3a50q2cpEJU1yEY_c_LROlN2cg3gS08C-WkKvrOPfIuC9lYKPNLbwrGBjIg9-Yd_dNWT2w5r4OQTM9_UBXR_3-A58oBkE_bxHCQSiYEkr-PoEa0bI8q73ItkmpPjS0d7IJp1YK6R-nhxR02_oYHaPSA5qPij47fmjjuvAxiSWji9DjBlg308HjPp_BH6WlMj471FcREznupZQDq4uprfnVs6-K219bJQhd7pSEegErrmuV-bGdEK-E0"></div>
-<div class="carousel-slide h-full"><img alt="Flame Portfolio 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_gSfVZjG3sz4nx0DAIbYaLwDoa6R3WBXNTDaMYTnUbcyaTEXhXO0QfSRTZAO8jrDgJccEekjYUuolmc39FTV2N9uM83bXk92H1kJLIBggdCAxKRJt6qXO2aeEeAVuullCJe2mOT_Zp_QuM0IoieA2jZ1umr8RvVDumranVPIlRRAFVhFvoQ21YFwaeLR5xTqV_BNQb66uJhpjeElPaaOrK6oo66ju2Fk9YqS1gjZkHaKYAGoFfAg4nOEV3MPvSGZOgtThbxh3C90"></div>
+<div class="lg:w-3/5 order-1 lg:order-2">
+<div class="carousel-container aspect-[16/10] bg-white rounded-3xl shadow-2xl border border-outline-variant/20 overflow-hidden group">
+<div class="carousel-track h-full" style="transform: translateX(-200%);">
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 1" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781669739/Flame/2_cjbi3m.webp"></div>
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 2" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781669739/Flame/6_xh2utz.webp"></div>
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 3" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781669739/Flame/1_sqtviz.webp"></div>
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 3" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781669739/Flame/4_xrzpax.webp"></div>
+<div class="carousel-slide h-full"><img alt="Flame Portfolio 3" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781669739/Flame/3_tx1syq.webp"></div>
 </div>
-<div class="carousel-dots"><div class="carousel-dot"></div><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+<div class="carousel-nav-btn carousel-nav-prev"><span class="material-symbols-outlined">chevron_left</span></div>
+<div class="carousel-nav-btn carousel-nav-next"><span class="material-symbols-outlined">chevron_right</span></div>
+<div class="carousel-dots"><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+</div>
+</div>
 </div>
 </div>
 <!-- Ciencuadras -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center flex-row-reverse">
-<div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden lg:order-1 carousel-container aspect-video">
-<div class="carousel-track h-full" style="transform: translateX(0%);">
-<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUobPSh3HL_kw9aRfnTlZVBKhYvGGnpxdoLZ9rSTFW56UuVZeYaqMcjpKHBVdLpzqUEV7yj8jrABVc5dh7FvLLgy1GGTySYhsmvRb_7mAq25mVL5le2yZ_YxSR5CV2704QoHQVl-7P8mCptLEImCKOrhKqfFdw9ts3ENGqjhkrLKC6IOD03W38_KJMvabS_mYczTRn0qzRMzFc9RRy5kwxqHJOSEBPMySYa2P1DvPtoJfV4BWnL3JwdB0HVk-nwKJZlEUZ_vPixEk"></div>
-<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCikJLxiUZJSspQb4LRLddhAZAYq0YE3paXXGVUSlBv99zgTFiSKkKHu-xQgw8R1V-LhARUSolKzaYGlKwnG1Nf30uGNW7UFJOtzqE68Nl3TGAFBsJmT6gqsHn_scCxm4KAZN_HgPUxf6A97L_7D2tPHU8M9c5YsqI_xXZpH5TfIrizvAaSkGVRluKJbb9557cOb_z4FiVvfQDzH1t27j_NIBcn84rqmtSGXiLLoXIbpzm7oksFPtdn51cb5W1UWi3Jkvj5jcD0Dt4"></div>
-<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwmxh1JU00Lvz5-O9_RgJK3a50q2cpEJU1yEY_c_LROlN2cg3gS08C-WkKvrOPfIuC9lYKPNLbwrGBjIg9-Yd_dNWT2w5r4OQTM9_UBXR_3-A58oBkE_bxHCQSiYEkr-PoEa0bI8q73ItkmpPjS0d7IJp1YK6R-nhxR02_oYHaPSA5qPij47fmjjuvAxiSWji9DjBlg308HjPp_BH6WlMj471FcREznupZQDq4uprfnVs6-K219bJQhd7pSEegErrmuV-bGdEK-E0"></div>
-<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_gSfVZjG3sz4nx0DAIbYaLwDoa6R3WBXNTDaMYTnUbcyaTEXhXO0QfSRTZAO8jrDgJccEekjYUuolmc39FTV2N9uM83bXk92H1kJLIBggdCAxKRJt6qXO2aeEeAVuullCJe2mOT_Zp_QuM0IoieA2jZ1umr8RvVDumranVPIlRRAFVhFvoQ21YFwaeLR5xTqV_BNQb66uJhpjeElPaaOrK6oo66ju2Fk9YqS1gjZkHaKYAGoFfAg4nOEV3MPvSGZOgtThbxh3C90"></div>
-<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1znpZj19BCA2P8v2dRi6J4-Bx39n4WGJZzUQkJnQcC_l9uxcXi9rXJsgX7cjjBNeDXs-NhmIUWdxpf7N1aVTXiQ1_nopiz9Pw0mnSUndWRNMDqlMDjv7ix7Z0HXdDPCoU33Vx6dC3FU26_GG79Th-EorieO3z1P0Gk3UlP2v9a9sLE9WW0B9s3eGmr2AYm8nDfd7mViIbqL6a5af-SzoVtBLOkBeM3JmQDGWd7oK46M3SzclA0pIcE26VJ6oVONs_BETlSuBxz7s"></div>
+<div class="flex flex-col gap-12">
+<div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+<div class="lg:w-2/5">
+<div class="flex items-center gap-4 mb-6">
+<img alt="Grupo Bolivar Logo" class="h-10 object-contain" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781671567/Logo_Bolivar_c9t7ft.svg">
+<h3 class="text-headline-md text-on-surface font-headline-md font-bold">Design System · Grupo Bolívar</h3>
 </div>
-<div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
-</div>
-<div class="lg:col-span-5 lg:order-2">
-<img alt="Grupo Bolivar Logo" class="h-12 mb-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClCPn88JhgIF9Jm4IMbrc2O12RAL0wbkpvhczmnjnud4in06_KyZJiite3O-9slPU5whtvcBnaf5buURPHbWmib4kjssLBYmHEkaLxP9DjniPGZugELqmTDm_3qQjCQGZOanF7sTl6hMZEOeqBWeUHQBGv9yxVE-gqIE3zT1W18_bPUCjXvE0Es-VzAJ7CWSzJi8o5cDfnG9FBjV1pBPnrfvXPxr-3eYFRJcwH0gG9iz9wHJqxPkq7Gyt_vSFxS6aKOinhpbBK88E">
-<h3 class="text-headline-md text-on-surface mb-4 font-headline-md font-bold">Design System · Grupo Bolívar / Ciencuadras (Imaginamos)</h3>
-<p class="font-body-md text-body-md text-secondary mb-6">Trabajé con Flame en la utilización y corrección de múltiples componentes para productos digitales en Santander Colombia, incluyendo proyectos como Santander Consumer Finanzauto y Prospera. Entre mis logros destaca la implementación de componentes y patrones de búsqueda optimizados para el sistema de diseño local.</p>
+<p class="font-body-md text-body-md text-secondary mb-8 leading-relaxed">En Imaginamos lideré la evolución del sistema de diseño transversal del Grupo Bolívar,&nbsp; Propuse e implementé una arquitectura de tokenización semántica que permitió la reutilización de componentes entre marcas con identidades visuales distintas, sin duplicar la librería base. Actualicé y creé patrones de diseño que estandarizaron la experiencia a nivel de grupo, y establecí un eje de documentación para elementos interactivos que redujo la fricción entre diseño y desarrollo.</p>
 <div class="flex flex-wrap gap-2">
 <span class="token-chip">Proptech</span>
 <span class="token-chip">Multi-platform</span>
 <span class="token-chip">Atomic Design</span>
 </div>
 </div>
+<div class="lg:w-3/5">
+<div class="carousel-container aspect-video bg-white rounded-3xl shadow-2xl border border-outline-variant/20 overflow-hidden group w-full h-auto">
+<div class="carousel-track h-full" style="transform: translateX(0%);">
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 1" class="w-full h-full object-contain bg-surface-container-low" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781671005/b3_mc3msl.webp"></div>
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 2" class="w-full h-full object-contain bg-surface-container-low" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781671005/b4_l15zzp.webp"></div>
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 2" class="w-full h-full object-contain bg-surface-container-low" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781671005/b5_z91ez5.webp"></div>
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 2" class="w-full h-full object-contain bg-surface-container-low" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781671005/b1_dkjisa.webp"></div>
+<div class="carousel-slide h-full"><img alt="Bolivar Portfolio 2" class="w-full h-full object-contain bg-surface-container-low" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781671005/b2_vhs4ph.webp"></div>
+</div>
+<div class="carousel-nav-btn carousel-nav-prev"><span class="material-symbols-outlined">chevron_left</span></div>
+<div class="carousel-nav-btn carousel-nav-next"><span class="material-symbols-outlined">chevron_right</span></div>
+<div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+</div>
+</div>
+</div>
 </div>
 <!-- Sentria -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-5">
-<img alt="Sentria Logo" class="h-10 mb-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYz_LczhjKNuGOH5dXpxGWCV2_W5e8IziV_TeYtHantaMMFqWdSiAUsEN5chR9eXphPy80AmBZfVf32wB1e10NVOXn7ZbuNEoWUZSDEKqRkLfWDMFcTxC45rhTJ6xicM09Iw2IMYtUInq86Ok3dadDeUV7xiwybUFoajxt92T8kPO7kUEJBcaQ-Bn-wN7ouBAsYFMyg0_sXYcRaayUxJ9_lvfiVj7PzjYvR2BuYKRm2wh_RIgFgitKnJaz4RcEZiDxr3tN-SqKnhU">
-<h3 class="text-headline-md text-on-surface mb-4 font-headline-md font-bold">Sentria Netdata</h3>
-<p class="font-body-md text-body-md text-secondary mb-6">Trabajé con Flame en la utilización y corrección de múltiples componentes para productos digitales en Santander Colombia, incluyendo proyectos como Santander Consumer Finanzauto y Prospera. Entre mis logros destaca la implementación de componentes y patrones de búsqueda optimizados para el sistema de diseño local.</p>
+<div class="flex flex-col gap-12">
+<div class="flex flex-col lg:flex-row items-center gap-12">
+<div class="lg:w-2/5 order-2 lg:order-1">
+<div class="flex items-center gap-4 mb-6">
+<img alt="Sentria Logo" class="h-8 object-contain" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781671680/Logo_sentria_erbzgt.svg">
+<h3 class="text-headline-md text-on-surface font-headline-md font-bold">Sentria Netdata</h3>
+</div>
+<p class="font-body-md text-body-md text-secondary mb-8 leading-relaxed">En Imaginamos diseñé el sistema de diseño de Sentria, plataforma MDR de ciberseguridad para Netdata, reemplazando una solución basada en Power BI que limitaba severamente la experiencia y la escalabilidad visual del producto. Construí el sistema desde cero a nivel primitivo y semántico — incluyendo una arquitectura de tokens para modo dark y light — con foco especial en los componentes más críticos de la plataforma: visualización de datos y gráficas de seguridad, navegación y layout para flujos de monitoreo complejo, y un sistema de alertas y estados que comunicara severidad con claridad inmediata. El resultado fue una interfaz moderna, consistente y escalable que transformó la percepción del producto frente a sus usuarios.</p>
 <div class="flex flex-wrap gap-2">
 <span class="token-chip">B2B SaaS</span>
 <span class="token-chip">Data Vis</span>
 <span class="token-chip">Technical UI</span>
 </div>
 </div>
-<div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden carousel-container aspect-video">
-<div class="carousel-track h-full" style="transform: translateX(-100%);">
-<div class="carousel-slide h-full"><img alt="Sentria Portfolio 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCikJLxiUZJSspQb4LRLddhAZAYq0YE3paXXGVUSlBv99zgTFiSKkKHu-xQgw8R1V-LhARUSolKzaYGlKwnG1Nf30uGNW7UFJOtzqE68Nl3TGAFBsJmT6gqsHn_scCxm4KAZN_HgPUxf6A97L_7D2tPHU8M9c5YsqI_xXZpH5TfIrizvAaSkGVRluKJbb9557cOb_z4FiVvfQDzH1t27j_NIBcn84rqmtSGXiLLoXIbpzm7oksFPtdn51cb5W1UWi3Jkvj5jcD0Dt4"></div>
-<div class="carousel-slide h-full"><img alt="Sentria Portfolio 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwmxh1JU00Lvz5-O9_RgJK3a50q2cpEJU1yEY_c_LROlN2cg3gS08C-WkKvrOPfIuC9lYKPNLbwrGBjIg9-Yd_dNWT2w5r4OQTM9_UBXR_3-A58oBkE_bxHCQSiYEkr-PoEa0bI8q73ItkmpPjS0d7IJp1YK6R-nhxR02_oYHaPSA5qPij47fmjjuvAxiSWji9DjBlg308HjPp_BH6WlMj471FcREznupZQDq4uprfnVs6-K219bJQhd7pSEegErrmuV-bGdEK-E0"></div>
-<div class="carousel-slide h-full"><img alt="Sentria Portfolio 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_gSfVZjG3sz4nx0DAIbYaLwDoa6R3WBXNTDaMYTnUbcyaTEXhXO0QfSRTZAO8jrDgJccEekjYUuolmc39FTV2N9uM83bXk92H1kJLIBggdCAxKRJt6qXO2aeEeAVuullCJe2mOT_Zp_QuM0IoieA2jZ1umr8RvVDumranVPIlRRAFVhFvoQ21YFwaeLR5xTqV_BNQb66uJhpjeElPaaOrK6oo66ju2Fk9YqS1gjZkHaKYAGoFfAg4nOEV3MPvSGZOgtThbxh3C90"></div>
-<div class="carousel-slide h-full"><img alt="Sentria Portfolio 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1znpZj19BCA2P8v2dRi6J4-Bx39n4WGJZzUQkJnQcC_l9uxcXi9rXJsgX7cjjBNeDXs-NhmIUWdxpf7N1aVTXiQ1_nopiz9Pw0mnSUndWRNMDqlMDjv7ix7Z0HXdDPCoU33Vx6dC3FU26_GG79Th-EorieO3z1P0Gk3UlP2v9a9sLE9WW0B9s3eGmr2AYm8nDfd7mViIbqL6a5af-SzoVtBLOkBeM3JmQDGWd7oK46M3SzclA0pIcE26VJ6oVONs_BETlSuBxz7s"></div>
-<div class="carousel-slide h-full"><img alt="Sentria Portfolio 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUobPSh3HL_kw9aRfnTlZVBKhYvGGnpxdoLZ9rSTFW56UuVZeYaqMcjpKHBVdLpzqUEV7yj8jrABVc5dh7FvLLgy1GGTySYhsmvRb_7mAq25mVL5le2yZ_YxSR5CV2704QoHQVl-7P8mCptLEImCKOrhKqfFdw9ts3ENGqjhkrLKC6IOD03W38_KJMvabS_mYczTRn0qzRMzFc9RRy5kwxqHJOSEBPMySYa2P1DvPtoJfV4BWnL3JwdB0HVk-nwKJZlEUZ_vPixEk"></div>
+<div class="lg:w-3/5 order-1 lg:order-2">
+<div class="carousel-container aspect-[16/10] bg-white rounded-3xl shadow-2xl border border-outline-variant/20 overflow-hidden group">
+<div class="carousel-track h-full" style="transform: translateX(0%);">
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 1" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781672959/s5_yrrspi.webp"></div>
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 2" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781672959/s3_ruhnt8.webp"></div>
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 2" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781672959/s1_lljt0p.webp"></div>
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 2" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781672959/s4_vpkrfi.webp"></div>
+<div class="carousel-slide h-full"><img alt="Sentria Portfolio 2" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781672959/s2_jbgo3o.webp"></div>
 </div>
-<div class="carousel-dots"><div class="carousel-dot"></div><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+<div class="carousel-nav-btn carousel-nav-prev"><span class="material-symbols-outlined">chevron_left</span></div>
+<div class="carousel-nav-btn carousel-nav-next"><span class="material-symbols-outlined">chevron_right</span></div>
+<div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -319,7 +372,7 @@
 <div class="space-y-8">
 <div>
 <div class="flex justify-between mb-2">
-<span class="font-label-sm text-label-sm font-bold">Figma Variables / Tokens Studio</span>
+<span class="font-label-sm text-label-sm font-bold">Figma Variables / Figma Tokens</span>
 <span class="font-label-sm text-label-sm text-primary font-bold">Expert</span>
 </div>
 <div class="h-1 bg-surface-container rounded-full overflow-hidden">
@@ -356,12 +409,7 @@
 </div>
 </div>
 <div class="lg:w-1/2 relative">
-<div class="bg-surface-container h-[500px] w-full rounded-2xl flex items-center justify-center p-12 relative overflow-hidden group">
-<div class="relative z-10 text-center">
-<span class="material-symbols-outlined text-primary text-8xl mb-6">architecture</span>
-<p class="font-display-lg italic text-on-surface font-extrabold">Precision in every pixel.</p>
-</div>
-</div>
+<div class="bg-surface-container h-[300px] md:h-[500px] w-full rounded-2xl flex items-center justify-center p-6 md:p-12 relative overflow-hidden group"><img alt="High-fidelity UI design mockup of a professional design system library" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8-DeavA6OS1MaHAXpwsFS17q-SI2m4qPoPGZMG7VtHtps2Lj_qORTRALCTM28P7MKyHIP8yCB6llSIzxTaQ7pEMgD0mDUESU0IRKzuociK1hexiKp6W67GV7taHDxqPiGiKrnUIklZVFXlGzntkr2_Abe52dpXApPvPfrTPX9oQZJjfzDF3m7BHePUSiOnA743tkZxn_4gTtNXKB_HIjC9Mc51KizdjTYkfY2xNHsq-xFBpgffA_Q9u_fPUZTPhsyqqviTe4eKB8"><div class="absolute inset-0 flex flex-col items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="material-symbols-outlined text-white text-4xl mb-2">target</span><p class="text-white font-bold text-center px-4">Precision in every pixel.</p></div></div>
 </div>
 </div>
 </section>
@@ -376,8 +424,16 @@
 </main>
 <!-- Footer -->
 <footer class="bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline">
-
 </footer>
+    </main>
+  </article>
+</div>
+<style>
+  .case-modal-shell { position: fixed; inset: 0; z-index: 50; display: flex; justify-content: center; align-items: flex-start; padding: 0; background: rgba(5, 8, 15, 0.78); overflow-y: auto; }
+  .case-modal-panel { position: relative; width: 100%; min-height: 100vh; background: #ffffff; overflow-y: auto; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25); }
+  .case-close-btn { position: sticky; top: 16px; right: 16px; float: right; z-index: 60; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0, 0, 0, 0.45); color: #ffffff; backdrop-filter: blur(8px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); }
+  @media (min-width: 768px) { .case-modal-shell { padding: 20px; align-items: center; } .case-modal-panel { width: 80vw; min-height: 95vh; max-height: 95vh; border-radius: 28px; } .case-close-btn { top: 18px; right: 18px; } }
+</style>
 <script>
     // Carousel Logic
     function initCarousels() {
@@ -387,6 +443,8 @@
             const track = container.querySelector('.carousel-track');
             const slides = track.querySelectorAll('.carousel-slide');
             const dotsContainer = container.querySelector('.carousel-dots');
+            const nextBtn = container.querySelector('.carousel-nav-next');
+            const prevBtn = container.querySelector('.carousel-nav-prev');
             let currentIndex = 0;
             const slideCount = slides.length;
 
@@ -395,7 +453,11 @@
                 const dot = document.createElement('div');
                 dot.classList.add('carousel-dot');
                 if (i === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(i));
+                dot.addEventListener('click', () => {
+                    clearInterval(interval);
+                    goToSlide(i);
+                    interval = setInterval(nextSlide, 5000);
+                });
                 dotsContainer.appendChild(dot);
             });
 
@@ -418,12 +480,29 @@
                 goToSlide(currentIndex);
             }
 
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                goToSlide(currentIndex);
+            }
+
+            if(nextBtn) nextBtn.addEventListener('click', () => {
+                clearInterval(interval);
+                nextSlide();
+                interval = setInterval(nextSlide, 5000);
+            });
+            
+            if(prevBtn) prevBtn.addEventListener('click', () => {
+                clearInterval(interval);
+                prevSlide();
+                interval = setInterval(nextSlide, 5000);
+            });
+
             // Auto-play
-            let interval = setInterval(nextSlide, 4000);
+            let interval = setInterval(nextSlide, 5000);
 
             // Pause on hover
             container.addEventListener('mouseenter', () => clearInterval(interval));
-            container.addEventListener('mouseleave', () => interval = setInterval(nextSlide, 4000));
+            container.addEventListener('mouseleave', () => interval = setInterval(nextSlide, 5000));
         });
     }
 
@@ -443,9 +522,9 @@
     // Simple scroll effect for navbar
     window.addEventListener('scroll', () => {
         const nav = document.querySelector('nav');
-        if (window.scrollY > 50) {
+        if (nav && window.scrollY > 50) {
             nav.classList.add('shadow-sm');
-        } else {
+        } else if (nav) {
             nav.classList.remove('shadow-sm');
         }
     });
