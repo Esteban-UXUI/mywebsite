@@ -7,6 +7,8 @@ sk<meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <!-- Material Symbols -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Three.js Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -222,60 +224,109 @@ I am a Senior UX/UI Designer with over seven years of experience crafting intuit
 </div>
 </div>
 </section>
-<!-- Selected Works & Insights -->
+
+<!-- My Work Section -->
 <section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="work">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-12" data-i18n="selectedWorks">Selected Works &amp; Insights</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-gutter mb-section-gap items-stretch">
-<a href="studycasemia.html" class="project-card group block h-full cursor-pointer flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
-<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
-<img alt="Fintech Dashboard Design" class="w-full h-full object-cover" src="Assets/ImagesMia/portada.webp"/>
-<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
-<p class="text-white font-body-md text-center leading-relaxed max-w-xs">Architecting a seamless cross-border payment ecosystem for high-growth enterprises, focusing on clarity, security, and rapid transaction processing workflows.</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-12 text-headline-lg-mobile md:text-headline-lg">Selected Works &amp; Insights</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1: 3D Holographic Project Showcase -->
+<div class="tilt-container group h-[400px]">
+<div class="tilt-card w-full h-full relative overflow-hidden rounded-xl bg-on-surface shadow-2xl flex flex-col justify-end p-8 border border-white/10">
+<!-- Holographic Background -->
+<div class="absolute inset-0 z-0 bg-[#000000]">
+<img alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" src="https://img.computing.es/wp-content/uploads/2024/03/22155324/IA-2.jpg.webp" /> 
+<div class="threejs-scene-container absolute inset-0 w-full h-full pointer-events-none opacity-60" data-animation-id="ANIMATION_53"></div>
 </div>
+<!-- Content Overlay -->
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<span class="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30 font-label-sm text-label-sm uppercase tracking-wider mb-4">Project Showcase</span>
 </div>
-<div class="flex flex-col gap-1">
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Real state</span>
-<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Mia Ciencuadras</h3>
-</div>
-</a>
-<div class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
-<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
-<img alt="Healthcare Mobile App" class="w-full h-full object-cover" src=https://res.cloudinary.com/dsbdjteyj/image/upload/v1781302584/totalPlayPortada_wlbvhj.webp>
-<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
-<p class="text-white font-body-md text-center leading-relaxed max-w-xs">A patient-first mobile experience designed to reduce friction in appointment booking and medical record management for over 2 million active users.</p>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Superapp</span>
-<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Totalplay</h3>
-</div>
-</div>
-<div class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);">
-<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
-<img alt="E-commerce Experience" class="w-full h-full object-cover" src=https://res.cloudinary.com/dsbdjteyj/image/upload/v1781302583/Sentria_portada_prixli.webp>
-<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
-<p class="text-white font-body-md text-center leading-relaxed max-w-xs">Redefining luxury retail through a headless commerce solution that prioritizes high-fidelity visual storytelling and a frictionless checkout journey.</p>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">cibersecurity</span>
-<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Netdata - Sentria</h3>
-</div>
-</div>
-<a href="designsystems.html" class="project-card group cursor-pointer h-full flex flex-col" style="transform: translateY(0px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);" aria-label="Open Design Systems case study">
-<div class="project-image-container relative aspect-[16/10] overflow-hidden bg-surface-container mb-6 rounded-lg shadow-[0_10px_40px_-15px_rgba(18,18,18,0.04)]">
-<img alt="SaaS Platform Interface" class="w-full h-full object-cover" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781305488/design_system_hazjrq.jpg">
-<div class="project-overlay absolute inset-0 bg-primary/90 opacity-0 transition-all duration-500 flex items-center justify-center p-8 transform translate-y-4">
-<p class="text-white font-body-md text-center leading-relaxed max-w-xs">Developing a complex design system for an enterprise-level analytics tool, ensuring scalability across multiple product modules and global teams.</p>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Tech & Design</span>
-<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Design systems</h3>
-</div>
+<div>
+<h3 class="font-headline-lg text-headline-lg text-white mb-4 drop-shadow-lg">Mia Smart portal</h3>
+<p class="text-white/70 font-body-md max-w-md mb-6 line-clamp-2">Revolutionizing the Colombian property market through conversational AI and data-driven matching.</p>
+<a class="inline-flex items-center text-primary font-bold group/link" href="/studycasemia.html">
+                    View Projects <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-2 transition-transform">arrow_forward</span>
 </a>
 </div>
+</div>
+</div>
+</div>
+<!-- Card 2: 3D Holographic Insights -->
+<div class="tilt-container group h-[400px]">
+<div class="tilt-card w-full h-full relative overflow-hidden rounded-xl bg-on-surface shadow-2xl flex flex-col justify-end p-8 border border-white/10">
+<!-- Holographic Background -->
+<div class="absolute inset-0 z-0 bg-[#000000]">
+  <img alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" src="https://images.squarespace-cdn.com/content/v1/5d139a978680e80001bede30/632e4108-b8cc-4b79-b13c-8ae9560181da/01+ACI+Speedpay+2.0+Design+System+-+Dark+Mode+copy.webp" /> 
+<div class="threejs-scene-container absolute inset-0 w-full h-full pointer-events-none opacity-60" data-animation-id="ANIMATION_53"></div>
+</div>
+<!-- Content Overlay -->
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<span class="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30 font-label-sm text-label-sm uppercase tracking-wider mb-4">Insights</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-headline-lg text-white mb-4 drop-shadow-lg">Design as system</h3>
+<p class="text-white/70 font-body-md max-w-md mb-6 line-clamp-2">Weekly thoughts on the evolution of product design in the AI era.</p>
+<a class="inline-flex items-center text-primary font-bold group/link" href="/designsystems.html">
+                    View project  <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-2 transition-transform">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Card 3: 3D Holographic Project Showcase -->
+<div class="tilt-container group h-[400px]">
+<div class="tilt-card w-full h-full relative overflow-hidden rounded-xl bg-on-surface shadow-2xl flex flex-col justify-end p-8 border border-white/10">
+<!-- Holographic Background -->
+<div class="absolute inset-0 z-0 bg-[#000000]">
+  <img alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" src="https://res.cloudinary.com/dsbdjteyj/image/upload/v1781302583/Sentria_portada_prixli.webp" />
+  <div class="threejs-scene-container absolute inset-0 w-full h-full pointer-events-none opacity-60" data-animation-id="ANIMATION_53"></div>
+</div>
+<!-- Content Overlay -->
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<span class="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30 font-label-sm text-label-sm uppercase tracking-wider mb-4">Project Showcase</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-headline-lg text-white mb-4 drop-shadow-lg">MDR Netdata</h3>
+<p class="text-white/70 font-body-md max-w-md mb-6 line-clamp-2">Turning complex enterprise metrics into clear, actionable decision flows.</p>
+<a class="inline-flex items-center text-primary font-bold group/link" href="/works.html">
+                    View project <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-2 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Card 4: 3D Holographic Insights -->
+<div class="tilt-container group h-[400px]">
+<div class="tilt-card w-full h-full relative overflow-hidden rounded-xl bg-on-surface shadow-2xl flex flex-col justify-end p-8 border border-white/10">
+<!-- Holographic Background -->
+<div class="absolute inset-0 z-0 bg-[#000000]">
+  <img alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" src="/Assets/ImagesMia/Desktop - 5.webp" />
+  <div class="threejs-scene-container absolute inset-0 w-full h-full pointer-events-none opacity-60" data-animation-id="ANIMATION_53"></div>
+</div>
+<!-- Content Overlay -->
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<span class="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30 font-label-sm text-label-sm uppercase tracking-wider mb-4">Insights</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-headline-lg text-white mb-4 drop-shadow-lg">UX for AI</h3>
+<p class="text-white/70 font-body-md max-w-md mb-6 line-clamp-2">Principles for building trustworthy experiences with transparent system behavior.</p>
+<a class="inline-flex items-center text-primary font-bold group/link" href="/designsystems.html">
+                    View project <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-2 transition-transform">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
 </section>
+
+
 <!-- Skills & Services -->
 <section class="py-section-gap bg-surface-container-low px-margin-mobile md:px-margin-desktop" id="services">
 <div class="max-w-container-max mx-auto">

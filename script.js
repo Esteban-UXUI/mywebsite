@@ -284,5 +284,192 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ===== Selected Works holographic (Three.js + mouse 3D tilt) ===== */
+  const initHolographicCards = () => {
+    if (!window.THREE) return;
+
+    const cards = document.querySelectorAll('#work .tilt-container');
+    const sceneContainers = document.querySelectorAll('#work .threejs-scene-container');
+    if (!cards.length || !sceneContainers.length) return;
+
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Por performance: limitar número de partículas.
+    const particleCount = reduceMotion ? 60 : 140;
+
+    const makeSeededRng = (seed) => {
+      // Mulberry32
+      let t = seed >>> 0;
+      return () => {
+        t += 0x6D2B79F5;
+        let x = Math.imul(t ^ (t >>> 15), 1 | t);
+        x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
+        return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+      };
+    };
+
+    sceneContainers.forEach((container, idx) => {
+      if (container.dataset.holoInit === 'true') return;
+      container.dataset.holoInit = 'true';
+
+      // Evita conflictos: si el canvas anterior existiera.
+      const existingCanvas = container.querySelector('canvas');
+      if (existingCanvas) existingCanvas.remove();
+
+      const width = container.clientWidth || 400;
+      const height = container.clientHeight || 300;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
+      camera.position.set(0, 0, 2.6);
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(width, height);
+      container.appendChild(renderer.domElement);
+
+      // Luces suaves para un look holográfico
+      // (con Points no es crítico, pero ayuda a la atmósfera si agregamos glow via materiales)
+
+      const rng = makeSeededRng(1337 + idx * 999);
+
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+
+      const baseColor = new THREE.Color('#79a6ff');
+      const accentColor = new THREE.Color('#EB9100');
+
+      for (let i = 0; i < particleCount; i++) {
+        // Un cubo alrededor del centro
+        const x = (rng() - 0.5) * 2.2;
+        const y = (rng() - 0.5) * 1.6;
+        const z = (rng() - 0.5) * 1.6;
+
+        positions[i * 3 + 0] = x;
+        positions[i * 3 + 1] = y;
+        positions[i * 3 + 2] = z;
+
+        // Mezcla de color
+        const mix = rng();
+        const c = baseColor.clone().lerp(accentColor, mix);
+        colors[i * 3 + 0] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const material = new THREE.PointsMaterial({
+        size: reduceMotion ? 0.03 : 0.045,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.85,
+        depthWrite: false,
+      });
+
+      const points = new THREE.Points(geometry, material);
+      scene.add(points);
+
+      // Un plano de “glow” muy sutil
+      const glowGeometry = new THREE.PlaneGeometry(2.6, 2.2);
+      const glowMaterial = new THREE.MeshBasicMaterial({
+        color: 0x79a6ff,
+        transparent: true,
+        opacity: 0.06,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+      });
+      const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+      glow.position.set(0, 0.02, -0.7);
+      scene.add(glow);
+
+      let rafId = null;
+      let mouseX = 0;
+      let mouseY = 0;
+
+      const tick = (t) => {
+        const time = t * 0.001;
+
+        // Movimiento holográfico: partículas “respiran”
+        if (!reduceMotion) {
+          points.rotation.y = time * 0.35;
+          points.rotation.x = Math.sin(time * 0.6) * 0.08;
+
+          points.position.y = Math.sin(time * 0.45) * 0.04;
+          glow.position.x = Math.sin(time * 0.3) * 0.05;
+        }
+
+        // Respuesta al mouse (tilt via cámara)
+        camera.position.x += (mouseX - camera.position.x) * 0.04;
+        camera.position.y += (-mouseY - camera.position.y) * 0.04;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+        rafId = requestAnimationFrame(tick);
+      };
+
+      const handleMouseMove = (e) => {
+        if (reduceMotion) return;
+        const rect = container.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) / rect.width;
+        const dy = (e.clientY - cy) / rect.height;
+        mouseX = dx * 1.0;
+        mouseY = dy * 1.0;
+      };
+
+      const parentTilt = container.closest('.tilt-container');
+      if (parentTilt) {
+        parentTilt.addEventListener('mousemove', handleMouseMove);
+        parentTilt.addEventListener('mouseleave', () => {
+          mouseX = 0;
+          mouseY = 0;
+          parentTilt.style.transform = '';
+        });
+
+        // transform 3D del contenedor principal (el “tile”)
+        parentTilt.addEventListener('mousemove', (e) => {
+          if (reduceMotion) return;
+          const rect = parentTilt.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) / rect.width;
+          const dy = (e.clientY - cy) / rect.height;
+
+          const rotY = dx * 10; // deg
+          const rotX = -dy * 8; // deg
+
+          parentTilt.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0px)`;
+        });
+
+        parentTilt.style.willChange = 'transform';
+      }
+
+      const onResize = () => {
+        const w = container.clientWidth || 400;
+        const h = container.clientHeight || 300;
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      };
+
+      const resizeObserver = new ResizeObserver(() => onResize());
+      resizeObserver.observe(container);
+
+      // Para evitar fugas si se desmonta (en este caso no pasa, pero dejamos margen)
+      container.dataset.holoCleanup = 'true';
+
+      rafId = requestAnimationFrame(tick);
+
+      // Guardar refs para cleanup eventual
+      container._holo = { scene, camera, renderer, rafId, resizeObserver };
+    });
+  };
+
+  initHolographicCards();
 
 });
+

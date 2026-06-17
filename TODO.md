@@ -1,6 +1,5 @@
-# TODO
-- [ ] Reemplazar el carrusel “Design & Prototyping” en `studycasemia.html` por un layout con miniaturas (thumbnails) para cambiar la imagen sin scroll.
-- [ ] Agregar texto/descripción debajo del carrusel que cambie según el slide seleccionado.
-- [ ] Implementar la lógica JS (o inline JS) para: seleccionar slide por miniatura, manejar prev/next, y sincronizar imagen + descripción + estado activo.
-- [ ] Verificar responsive en móvil y desktop abriendo `studycasemia.html`.
+- [ ] Agregar efecto 3D holographic con partículas Three.js en las cards de `#work`.
+- [ ] Estilizar contenedor del canvas para quedar detrás del contenido y con border-radius.
+- [ ] Implementar lógica en `script.js` para crear una escena por card, animar partículas y responder al mouse (tilt).
+- [ ] Probar en navegador (desktop y mobile) y ajustar performance (FPS/partículas).
 
