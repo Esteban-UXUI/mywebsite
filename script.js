@@ -471,5 +471,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initHolographicCards();
 
+  /* ===== Protected access modal for selected works ===== */
+  const protectedModal = document.getElementById('protected-access-modal');
+  const protectedCloseBtn = document.getElementById('protected-access-close');
+  const protectedSubmitBtn = document.getElementById('protected-access-submit');
+  const protectedCancelBtn = document.getElementById('protected-access-cancel');
+  const protectedKeyInput = document.getElementById('protected-access-key');
+  const protectedErrorEl = document.getElementById('protected-access-error');
+
+  // Demo key: reemplázala por la real si aplica.
+  const ACCESS_KEY = '1234';
+
+  let pendingTargetHref = null;
+
+  const openProtectedModal = (targetHref) => {
+    pendingTargetHref = targetHref;
+    if (protectedErrorEl) protectedErrorEl.classList.add('hidden');
+    if (protectedKeyInput) protectedKeyInput.value = '';
+
+    protectedModal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    // focus al input para accesibilidad
+    setTimeout(() => {
+      protectedKeyInput?.focus();
+    }, 0);
+  };
+
+  const closeProtectedModal = () => {
+    pendingTargetHref = null;
+    protectedModal?.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll('[data-protected-project][data-target-href]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      // Evitar navegación hasta validar.
+      e.preventDefault();
+      const href = el.getAttribute('data-target-href');
+      openProtectedModal(href);
+    });
+  });
+
+  protectedCloseBtn?.addEventListener('click', closeProtectedModal);
+  protectedCancelBtn?.addEventListener('click', closeProtectedModal);
+
+  protectedModal?.addEventListener('click', (e) => {
+    // click fuera del panel
+    if (e.target === protectedModal) closeProtectedModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !protectedModal?.classList.contains('hidden')) {
+      closeProtectedModal();
+    }
+  });
+
+  protectedSubmitBtn?.addEventListener('click', () => {
+    const key = (protectedKeyInput?.value || '').trim();
+    const isValid = key === ACCESS_KEY;
+
+    if (!isValid) {
+      protectedErrorEl?.classList.remove('hidden');
+      protectedKeyInput?.focus();
+      return;
+    }
+
+    closeProtectedModal();
+    const href = pendingTargetHref;
+    pendingTargetHref = null;
+    if (href) window.location.href = href;
+  });
+
+  protectedKeyInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') protectedSubmitBtn?.click();
+  });
+
 });
+
 
