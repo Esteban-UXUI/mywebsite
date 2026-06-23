@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuButton = document.getElementById('mobileMenuButton');
   const mobileMenu = document.getElementById('mobileMenu');
   const mobileMenuLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
-  const languageButtons = document.querySelectorAll('.lang-toggle-button');
+  // En index.html y páginas de caso el idioma se define con botones data-lang.
+  // Si no existen, no rompe el flujo.
+  const languageButtons = document.querySelectorAll('.lang-toggle-button, [data-lang]');
+  
 
   // Clients Carousel (infinite) - loop perfecto sin salto
   const initClientsCarousel = () => {
@@ -102,19 +105,41 @@ document.addEventListener('DOMContentLoaded', () => {
       servicesCard7Desc: 'Leading and growing design teams through structured feedback.',
       servicesCard8Title: 'AI Expertise',
       servicesCard8Desc: 'Leveraging generative AI and machine learning to build intelligent, user-centric interfaces.',
-      // Work cards
-      workCard1Tag: 'Real estate',
-      workCard1Title: 'Mia Ciencuadras',
-      workCard1OverlayText: 'Architecting a seamless cross-border payment ecosystem for high-growth enterprises, focusing on clarity, security, and rapid transaction processing workflows.',
-      workCard2Tag: 'Superapp',
-      workCard2Title: 'Totalplay',
-      workCard2OverlayText: 'A patient-first mobile experience designed to reduce friction in appointment booking and medical record management for over 2 million active users.',
-      workCard3Tag: 'Cybersecurity',
-      workCard3Title: 'Netdata - Sentria',
-      workCard3OverlayText: 'Redefining luxury retail through a headless commerce solution that prioritizes high-fidelity visual storytelling and a frictionless checkout journey.',
-      workCard4Tag: 'Ecommerce',
-      workCard4Title: 'TZM',
-      workCard4OverlayText: 'Developing a complex design system for an enterprise-level analytics tool, ensuring scalability across multiple product modules and global teams.',
+      // Work cards (index)
+      workCard1Tag: 'Real estate showcase',
+      workCard1Title: 'Mia Smart portal',
+      workCard1OverlayText: 'Revolutionizing the Colombian property market through conversational AI and data-driven matching.',
+      workCard1LinkText: 'View Projects',
+
+      workCard2Tag: 'Design systems',
+      workCard2Title: 'Design as system',
+      workCard2OverlayText: 'Weekly thoughts on the evolution of product design in the AI era.',
+      workCard2LinkText: 'View project',
+
+      workCard3Tag: 'Cybersecuriry',
+      workCard3Title: 'MDR Netdata',
+      workCard3OverlayText: 'Turning complex enterprise metrics into clear, actionable decision flows.',
+      workCard3LinkText: 'View project',
+
+      workCard4Tag: 'SuperApp',
+      workCard4Title: 'Total play SuperApp',
+      workCard4OverlayText: 'Principles for building trustworthy experiences with transparent system behavior.',
+      workCard4LinkText: 'View project',
+
+      // Protected access modal (index)
+      protectedAccessPill: 'Protected access',
+      protectedAccessTitle: 'Protected access',
+      protectedAccessDescription:
+        'This project is protected by confidentiality. Please enter the access key to continue.',
+      protectedAccessKeyLabel: 'Access key',
+      protectedAccessSubmit: 'Continue',
+      protectedAccessCancel: 'Cancel',
+      protectedAccessError: 'Incorrect key. Try again.',
+      protectedAccessExample: '(Demo example: use ',
+      protectedAccessExampleKey: '1234',
+      protectedAccessExampleSuffix: ' )',
+
+
       // Study case strings (index link labels)
       caseStudyLabel: 'Case Study — Real Estate Innovation',
       caseStudyTitle: 'MIA — Motor de Inteligencia Artificial',
@@ -128,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
       about: 'Sobre mí',
       services: 'Servicios',
       contact: 'Contacto',
-      heroTitle: 'Diseñador de Producto & Pensador Estratégico',
+      heroTitle: 'Diseñador de Producto & UX UI ',
       heroText: 'Creo experiencias significativas mediante la investigación y el detalle. Conecto las necesidades humanas con los objetivos de negocio a través de sistemas de diseño cuidadosamente curados.',
       years: 'Años de Experiencia',
       brands: 'Marcas',
@@ -196,13 +221,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.setAttribute('data-lang', activeLang);
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.dataset.i18n;
-      if (translations[activeLang][key]) {
-        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-          el.placeholder = translations[activeLang][key];
-        } else {
-          el.textContent = translations[activeLang][key];
-        }
+      if (!translations[activeLang] || !translations[activeLang][key]) return;
+
+      const value = translations[activeLang][key];
+
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = value;
+        return;
       }
+
+      // Si el nodo trae children especiales, igual reemplazamos el texto visible.
+      el.textContent = value;
     });
 
     languageButtons.forEach((button) => {
@@ -220,7 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLanguage(savedLanguage);
 
   languageButtons.forEach((button) => {
-    button.addEventListener('click', () => applyLanguage(button.dataset.lang));
+    button.addEventListener('click', () => {
+      const lang = button.dataset.lang;
+      if (!lang) return;
+      applyLanguage(lang);
+    });
   });
 
   if (nav && nav.classList.contains('fixed')) {
