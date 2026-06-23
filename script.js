@@ -7,6 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Si no existen, no rompe el flujo.
   const languageButtons = document.querySelectorAll('.lang-toggle-button, [data-lang]');
   
+  // Ocultamos el switch de idioma (si existe) para dejar el sitio 100% en español.
+  // Nota: mantenemos el código de i18n por compatibilidad, pero forzamos es como idioma activo.
+  languageButtons.forEach((btn) => {
+    if (btn && btn.dataset && btn.dataset.lang === 'en') {
+      btn.style.display = 'none';
+    }
+  });
+  
+
+  
 
   // Clients Carousel (infinite) - loop perfecto sin salto
   const initClientsCarousel = () => {
@@ -58,6 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const translations = {
     en: {
+      // NOTA: si activas Weglot, estas traducciones ya no serán necesarias.
+      // Se mantienen para compatibilidad con el comportamiento actual.
+
       home: 'Home',
       work: 'Work',
       about: 'About',
@@ -86,8 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
       footerDribbble: 'Dribbble',
       footerEmail: 'Email',
       // About + Work card / misc
-      aboutHeroAltPlaceholder: '',
-      aboutBio: 'I am a Senior UX/UI Designer with over seven years of experience crafting intuitive, data-driven digital solutions across diverse sectors like banking and e-commerce. I specialize in leading cross-functional teams and managing complex design systems to bridge the gap between user needs and business objectives. Currently, I am leveraging advanced AI platforms—including Anthropic, Stitch, and Google Labs—to innovate and streamline the design process. I am seeking new professional opportunities where I can apply my expertise in product strategy and emerging technologies to drive impactful user experiences.',
+      aboutHeroAltPlaceholder: 'If you think good design is expensive, you should look at the cost of bad design.',
+      aboutBio: 'I am a Senior UX/UI Designer with over seven years of experience crafting intuitive, data-driven digital solutions across diverse sectors like banking and e-commerce. I specialize in leading cross-functional teams and managing complex design systems to bridge the gap between user needs and business objectives. Currently, I leverage advanced AI platforms—including Anthropic, Stitch, and Google Labs—to innovate and streamline the design process. I am seeking new professional opportunities where I can apply my expertise in product strategy and emerging technologies to drive impactful user experiences.',
       // Services cards
       servicesCard1Title: 'UI/UX Design',
       servicesCard1Desc: 'Creating seamless digital interfaces across mobile and web platforms.',
@@ -175,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
       footerBehance: 'Behance',
       footerDribbble: 'Dribbble',
       footerEmail: 'Email',
-      aboutBio: 'Soy un Senior UX/UI Designer con más de siete años de experiencia creando soluciones digitales intuitivas y basadas en datos en sectores diversos como banca y e-commerce. Me especializo en liderar equipos multifuncionales y gestionar sistemas de diseño complejos para conectar las necesidades de los usuarios con los objetivos del negocio. Actualmente, utilizo plataformas de IA avanzadas—incluyendo Anthropic, Stitch y Google Labs—para innovar y agilizar el proceso de diseño. Busco nuevas oportunidades profesionales donde pueda aplicar mi experiencia en estrategia de producto y tecnologías emergentes para impulsar experiencias significativas.',
+      aboutBio: 'Soy un Senior UX/UI Designer con más de siete años de experiencia creando soluciones digitales intuitivas y basadas en datos en sectores diversos como banca y e-commerce. Me especializo en liderar equipos multifuncionales y gestionar sistemas de diseño complejos para conectar las necesidades de los usuarios con los objetivos del negocio. Busco nuevas oportunidades profesionales donde pueda aplicar mi experiencia en estrategia de producto y tecnologías emergentes para impulsar experiencias significativas.',
       // Services cards
       servicesCard1Title: 'UI/UX Design',
       servicesCard1Desc: 'Creación de interfaces digitales fluidas en plataformas móviles y web.',
@@ -245,8 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('preferredLanguage', activeLang);
   };
 
-  const savedLanguage = localStorage.getItem('preferredLanguage') || 'en';
+  const savedLanguage = localStorage.getItem('preferredLanguage') || 'es';
   applyLanguage(savedLanguage);
+
 
   languageButtons.forEach((button) => {
     button.addEventListener('click', () => {
