@@ -288,4 +288,53 @@ textarea:focus {
 }
 
 
+/* ===== Weglot bubble launcher ===== */
+#weglot-bubble{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(17,17,17,0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+#weglot-bubble .material-symbols-outlined{
+  color: #79a6ff;
+  font-size: 22px;
+}
+
+/* Banderas/etiquetas ES/EN */
+.weglot-flag{
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: rgba(255,255,255,0.95);
+  position: absolute;
+  transform: translateY(0);
+  transition: opacity 0.2s ease;
+}
+.weglot-flag--es{ opacity: 1; }
+.weglot-flag--en{ opacity: 0.35; }
+
+#weglot-bubble.is-lang-en .weglot-flag--es{ opacity: 0.35; }
+#weglot-bubble.is-lang-en .weglot-flag--en{ opacity: 1; }
+
+#weglot-bubble:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+  border-color: rgba(121,166,255,0.35);
+}
+#weglot-bubble:active{
+  transform: translateY(0px) scale(0.98);
+}
 

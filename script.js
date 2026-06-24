@@ -12,6 +12,48 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.style.display = 'none';
   });
 
+  /* ===== Weglot ES/EN on bubble click ===== */
+  const bubble = document.getElementById('weglot-bubble');
+  if (bubble && window.Weglot) {
+    const setBubbleLang = (lang) => {
+      // lang: 'es' | 'en'
+      if (!lang) return;
+      bubble.classList.remove('is-lang-en');
+      if (lang.toLowerCase().startsWith('en')) bubble.classList.add('is-lang-en');
+    };
+
+    // Render inicial según el idioma actual de Weglot (si está disponible)
+    try {
+      const initial = (window.Weglot?.getCurrentLanguage?.() || window.Weglot?.currentLang || '').toLowerCase();
+      setBubbleLang(initial.startsWith('en') ? 'en' : 'es');
+    } catch (e) {}
+
+    bubble.addEventListener('click', () => {
+
+      try {
+        // Conmute ES <-> EN al hacer click.
+        // Weglot suele proveer API como: Weglot.switchTo(lang)
+        // Si no existe, buscamos un launcher interno y lo disparamos.
+        const currentLang = (window.Weglot?.getCurrentLanguage?.() || window.Weglot?.currentLang || '').toLowerCase();
+        const target = currentLang.startsWith('en') ? 'es' : 'en';
+
+        if (typeof window.Weglot.switchTo === 'function') {
+          window.Weglot.switchTo(target);
+          setBubbleLang(target);
+          return;
+        }
+
+
+        // Fallback: dispara el switcher interno (si Weglot lo inyectó aunque esté oculto)
+        const internalSwitcher = document.querySelector('[data-weglot-switcher], .weglot-switcher, [data-weglot-language]');
+        if (internalSwitcher) internalSwitcher.click();
+      } catch (e) {
+        // no-op
+      }
+    });
+  }
+
+
   
 
   
