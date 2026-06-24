@@ -278,4 +278,14 @@ textarea:focus {
   z-index: 1;
 }
 
+/* Asegura que el canvas Three.js quede detrás del texto en la grilla del work */
+#work .threejs-scene-container {
+  z-index: 0;
+}
+
+#work .tilt-card > .relative {
+  z-index: 1;
+}
+
+
 
