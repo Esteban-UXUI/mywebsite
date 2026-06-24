@@ -487,13 +487,25 @@ Sistemas de diseño
     <link rel="alternate" hreflang="es" href="https://es.estebanui.com">
 
     <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+
     <script>
       Weglot.initialize({
-        api_key: 'wg_9459cf9da883dd31fde1a9197898bc405'
+        api_key: 'wg_9459cf9da883dd31fde1a9197898bc405',
+        // Ocultamos la UI por defecto de Weglot; la burbuja la controlamos nosotros.
+        hideSwitcher: true,
       });
     </script>
 
+    <!-- Weglot bubble launcher (clic => cambia ES/EN) -->
+    <button id="weglot-bubble" type="button" aria-label="Cambiar idioma" title="Cambiar idioma">
+      <span class="weglot-flag weglot-flag--es" aria-hidden="true">ES</span>
+      <span class="weglot-flag weglot-flag--en" aria-hidden="true">EN</span>
+    </button>
+
+
+
     <script src="script.js" defer></script>
+
 
     <!-- Vanta HALO background (attach after DOM exists) -->
 
