@@ -211,15 +211,49 @@ textarea:focus {
 
 
 @media (max-width: 768px) {
+  /* Ajustes mobile: reducir 2pts (≈0.13rem) para H1/H2/P que se ven grandes */
   .font-display-lg {
-    font-size: 2.5rem;
+    font-size: 2.37rem;
     line-height: 1.15;
   }
+
+  /* Tipografías en mobile que corresponden a H1/H2 y párrafos (clases Tailwind) */
+  .font-headline-lg {
+    font-size: 2.9rem;
+    line-height: 1.15;
+  }
+
+  .font-headline-md {
+    font-size: 1.9rem;
+    line-height: 1.15;
+  }
+
+  /* Párrafos: fijar a 14px en mobile (solicitud) */
+  .font-body-lg {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .font-body-md {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+
+
 
   /* Centrado visual de métricas en mobile */
   #heroSection {
     text-align: center;
   }
+
+  /* El H1/H2 del header no debe ocupar el 100% del ancho en mobile */
+  #heroSection .max-w-3xl {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 
   .hero-stats {
     gap: 14px;
